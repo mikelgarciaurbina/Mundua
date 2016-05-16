@@ -64,3 +64,29 @@ user2.hobbies.push(hobby4)
 user2.save!
 
 puts "Hobbies added"
+
+technology1 = Technology.create(name: "HTML5")
+technology2 = Technology.create(name: "CSS3")
+technology3 = Technology.create(name: "Ruby")
+technology4 = Technology.create(name: "Ruby on Rails")
+technology5 = Technology.create(name: "TDD")
+technology6 = Technology.create(name: "JavaScript")
+technology7 = Technology.create(name: "JQuery")
+
+puts "Technologies created"
+
+user1.technologies.push(technology1)
+user1.technologies.push(technology2)
+user1.technologies.push(technology3)
+user1.technologies.push(technology4)
+user1.technologies.push(technology5)
+user1.save!
+
+user2.technologies.push(technology1)
+user2.technologies.push(technology4)
+user2.technologies.push(technology5)
+user2.technologies.push(technology6)
+user2.technologies.push(technology7)
+user2.save!
+
+puts "Technologies Added"
