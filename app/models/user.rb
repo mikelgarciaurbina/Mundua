@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   belongs_to :group
   has_many :userHobbies
   has_many :hobbies, through: :userHobbies
+  has_many :userTechnologies
+  has_many :technologies, through: :userTechnologies
 end
