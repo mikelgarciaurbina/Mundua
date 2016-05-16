@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516071624) do
+ActiveRecord::Schema.define(version: 20160516072847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,18 @@ ActiveRecord::Schema.define(version: 20160516071624) do
   end
 
   add_index "groups", ["house_id"], name: "index_groups_on_house_id", using: :btree
+
+  create_table "houses", force: :cascade do |t|
+    t.string   "latitude"
+    t.string   "longitude"
+    t.string   "address"
+    t.integer  "rooms"
+    t.string   "images"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "owner_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer  "group_id"
