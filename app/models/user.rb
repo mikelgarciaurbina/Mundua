@@ -5,4 +5,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :group
+  has_many :userHobbies
+  has_many :hobbies, through: :userHobbies
 end
