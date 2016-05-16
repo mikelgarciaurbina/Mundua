@@ -44,3 +44,23 @@ user2.group = group2
 user2.save!
 
 puts "Relations created"
+
+hobby1 = Hobby.create(name: "Basketball")
+hobby2 = Hobby.create(name: "Futball")
+hobby3 = Hobby.create(name: "Tennis")
+hobby4 = Hobby.create(name: "Baseball")
+
+puts "Hobbies created"
+
+user1.hobbies.push(hobby1)
+user1.hobbies.push(hobby2)
+user1.hobbies.push(hobby3)
+
+user1.save!
+
+user2.hobbies.push(hobby1)
+user2.hobbies.push(hobby4)
+
+user2.save!
+
+puts "Hobbies added"
