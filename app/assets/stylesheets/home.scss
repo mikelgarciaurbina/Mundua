@@ -1,0 +1,62 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.header,
+.footer{
+  min-height: 560px;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+  background: url("/assets/map.png") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.footer{
+  min-height: 380px;
+}
+.form{
+  background: rgba(0,0,0,0.5) !important;
+}
+.form > div{
+  margin-bottom: 0;
+}
+.form *{
+  transition: none;
+}
+.form select{
+  border-left-color: #dedede !important;
+}
+.push-top{
+  margin-top: 90px;
+  padding-bottom: 130px;
+}
+.addon-append input,
+.addon-append .btn{
+  border-radius: 0;
+  font-size: 17px !important;
+}
+.social{
+  border-top: 1px solid rgba(255,255,255,0.16);
+}
+
+/* __ colors __ */
+
+.light-silver{
+  background: #e8e8e8;
+}
+
+.rgba{
+  background: rgba(0,0,0,0.7);
+  min-height: 380px;
+}
+
+.margin-top-10{
+  margin-top: 10px;
+}
+
+@media (max-width: 800px){
+  .navbar{
+    background: #2196F3;
+  }
+}

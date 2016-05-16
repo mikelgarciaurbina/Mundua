@@ -1,0 +1,220 @@
+<!-- Header Start -->
+<div class="row header">
+  <!-- Modal -->
+  <div class="modal" id="modal-login" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <a href="#" class="btn-close" aria-hidden="true">×</a>
+      </div>
+      <div class="modal-body js-modal-body">
+      </div>
+    </div>
+  </div>
+  <!-- /Modal -->
+
+  <!-- Navbar Start -->
+  <div class="navbar cf height-auto padding-20 transparent -tablet-padding">
+    <ul class="pull-right menu href-text-white">
+      <li><a href="#"><i class="fa fa-lg fa-support"></i> Help</a></li>
+      <% if user_signed_in? %>
+        <li>
+          <%= link_to 'Sign out', destroy_user_session_path, method:'DELETE' %>
+        </li>
+      <% else %>
+        <li><%= link_to 'Login', new_user_session_path, class: "js-login" %></li>
+        <li>
+          <%= link_to 'Join Now', new_user_registration_path, class: "fill-blue js-join-now" %>
+        </li>
+      <% end %>
+      <!-- <li><a href="#">About Us</a></li>
+      <li><a class="fill-blue" href="#">Join Now</a></li> -->
+    </ul>
+  </div>
+  <!-- Navbar End -->
+
+  <!-- Row Intro Start -->
+  <div class="row text-center push-top">
+    <h2 class="text-white pull-left width-100">Find the Best Place to Work</h2>
+    <p class="text-white">
+      Where will you feel at home? These are complicated questions with many variables to consider...
+    </p>
+  </div>
+  <!-- Row Intro End -->
+
+  <!-- Search Form Start -->
+  <div class="wrapper960 center">
+    <form class="form l padding-10 cf">
+      <div class="col-10">
+        <input class="border-white -rounded" type="text" placeholder="Search by city, neighborhood, or address...">
+      </div>
+      <div class="col-2">
+        <button class="btn blue width-100">Search</button>
+      </div>
+    </form>
+  </div>
+  <!-- Search Form End -->
+
+</div>
+<!-- Header End -->
+
+
+<!-- Content Start -->
+
+<div class="wrapper960 center padding-v-40 tablet-padding">
+  <div class="row padding-v-40 tablet-padding-top col-gutter-20 js-cities">
+    <!-- Item Start -->
+    <div class="col-4">
+      <div class="bg">
+        <img src="https://nomadlist.com/assets/img/cities/bangkok-thailand-500px.jpg" alt="">
+        <div class="bg-text">
+          <p class="wifi"><i class="fa fa-wifi" aria-hidden="true"></i> 40 Mbps.</p>
+          <h3 class="citi">Bangkok</h3>
+          <p>thailand</p>
+          <p class="weather"><i class="fa fa-cloud" aria-hidden="true"></i> 35ºC</p>
+          <p class="salary">1000<i class="fa fa-eur" aria-hidden="true"></i></p>
+        </div>
+        <div class="overlay">
+          <div class="row">
+            <div class="col-4">
+              <p>Cost</p>
+              <p>Weather</p>
+              <p>Air</p>
+              <p>Fun</p>
+              <p>Safety</p>
+            </div>
+            <div class="col-8">
+              <p class="progressbar"><span class="real-progressbar" style="background: blue;width: 60%;"></span></p>
+              <p class="progressbar"><span class="real-progressbar" style="background: green;width: 80%;"></span></p>
+              <p class="progressbar"><span class="real-progressbar" style="background: red;width: 20%;"></span></p>
+              <p class="progressbar"><span class="real-progressbar" style="background: red;width: 40%;"></span></p>
+              <p class="progressbar"><span class="real-progressbar" style="background: blue;width: 60%;"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Item End -->
+
+    <!-- Item Start -->
+    <div class="col-4">
+      <a href="#" class="pull-left width-100 silver">
+        <h5 class="absolute-bottom padding-20">RENTAL TWO</h5>
+        <img class="pull-left width-100" src="https://decorator.io/media/placeholder.png" />
+      </a>
+    </div>
+    <!-- Item End -->
+
+    <!-- Item Start -->
+    <div class="col-4">
+      <a href="#" class="pull-left width-100 silver">
+        <h5 class="absolute-bottom padding-20">RENTAL THREE</h5>
+        <img class="pull-left width-100" src="https://decorator.io/media/placeholder.png" />
+      </a>
+    </div>
+    <!-- Item End -->
+  </div>
+</div>
+<!-- Content End -->
+
+<!-- Footer Start -->
+<div class="row footer">
+
+  <!-- Row Rgba Start -->
+  <div class="row rgba padding-top-20">
+
+    <!-- Wrapper Start -->
+    <div class="wrapper960 center">
+
+      <!-- About Row Start -->
+      <div class="row padding-v-40 tablet-padding">
+
+        <!-- Item Start -->
+        <div class="col-3">
+          <h4 class="text-blue text300 padding-bottom-10">Company</h4>
+          <ul class="href-text-gray hover-href-text-underline">
+            <li><a href="#">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Policies</a></li>
+            <li><a href="#">Terms & Privacy</a></li>
+          </ul>
+        </div>
+        <!-- Item End  -->
+
+        <!-- Item Start -->
+        <div class="col-3">
+          <h4 class="text-blue text300 padding-bottom-10">Support</h4>
+          <ul class="href-text-gray hover-href-text-underline">
+            <li><a href="#">Support Links</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Knowledge Base</a></li>
+            <li><a href="#">Support Blog</a></li>
+            <li><a href="#">Support Policies</a></li>
+            <li><a href="#">Privacy</a></li>
+          </ul>
+        </div>
+        <!-- Item End -->
+
+        <!-- Item Start -->
+        <div class="col-6">
+
+          <h4 class="text-blue padding-v-20 text300">Subscribe To News Letter</h4>
+
+          <!-- Search Right Start  -->
+          <form class="form l blue fill-white col-10">
+            <div class="addon-append">
+              <input class="border-transparent" type="text" placeholder="Subscribe To News Letter">
+              <span class="append btn border-transparent">
+            <button>Subscribe Now</button>
+          </span>
+            </div>
+          </form>
+          <!-- Search Right End  -->
+        </div>
+        <!-- Item Start -->
+
+      </div>
+      <!-- About Row End -->
+
+      <!-- Social Start -->
+      <div class="row social button-center padding-v-20">
+
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Twitter</span>
+          <i class="fa fa-twitter"></i>
+        </a>
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Facebook</span>
+          <i class="fa fa-facebook"></i>
+        </a>
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Linkedin</span>
+          <i class="fa fa-linkedin"></i>
+        </a>
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Google</span>
+          <i class="fa fa-google"></i>
+        </a>
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Instagram</span>
+          <i class="fa fa-instagram"></i>
+        </a>
+        <a href="#" class="btn icon border blue round hover-tooltip margin-right">
+          <span class="tooltip top">Pinterest</span>
+          <i class="fa fa-pinterest"></i>
+        </a>
+
+        <p class="text-center text-gray padding-v-20">Created by Mikel Garcia</p>
+
+      </div>
+      <!-- Social End -->
+
+    </div>
+    <!-- Wrapper End -->
+
+  </div>
+  <!-- Row Rgba End -->
+
+</div>
+<!-- Footer End -->
