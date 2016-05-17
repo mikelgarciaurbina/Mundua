@@ -41,7 +41,7 @@ $( document ).ready(function() {
     safety = (safety > 95) ? 95 : safety;
     var safetyColor = (safety > 50) ? green : red;
     return '' +
-      '<div class="col-4">' +
+      '<div class="col-4 padding-bottom-20">' +
       '<div class="bg">' +
         '<img src="' + url_base_nomadlist + city.media.image[500] + '" alt="">' +
         '<div class="bg-text">' +
