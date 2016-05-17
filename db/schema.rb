@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516083742) do
+ActiveRecord::Schema.define(version: 20160517084017) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,11 +20,14 @@ ActiveRecord::Schema.define(version: 20160516083742) do
     t.integer  "house_id"
     t.string   "name"
     t.text     "description"
-    t.string   "image"
     t.string   "friends_requests"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "owner_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "groups", ["house_id"], name: "index_groups_on_house_id", using: :btree
@@ -40,7 +43,6 @@ ActiveRecord::Schema.define(version: 20160516083742) do
     t.string   "longitude"
     t.string   "address"
     t.integer  "rooms"
-    t.string   "images"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
@@ -77,7 +79,6 @@ ActiveRecord::Schema.define(version: 20160516083742) do
     t.integer  "group_id"
     t.string   "name"
     t.string   "lastname"
-    t.string   "avatar"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"

@@ -5,7 +5,6 @@ class CreateHouses < ActiveRecord::Migration
       t.string :longitude
       t.string :address
       t.integer :rooms
-      t.string :images
       t.text :description
 
       t.timestamps null: false

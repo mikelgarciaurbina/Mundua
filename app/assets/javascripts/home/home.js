@@ -89,9 +89,13 @@ $( document ).ready(function() {
   $(".js-forgot-password").on("click", function(event){
     loadModal(event, $(this));
   });
+  $(".js-new-group").on("click", function(event){
+    loadModal(event, $(this));
+  });
   function loadModal(event, self){
     event.preventDefault();
-    $(".js-modal-body").load(self.attr("href"));
-    $(location).attr('href', '#modal-login');
+    $(".js-modal-body").load(self.attr("href"), function(){
+      $(location).attr('href', '#modal');
+    });
   }
 });

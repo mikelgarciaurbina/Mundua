@@ -1,0 +1,9 @@
+<div class="media">
+  <div class="media-left">
+    <%= link_to image_tag(@group.image.url, class: 'media-object'), @group.image.url, target: '_blank' %>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= @group.name %></h4>
+    <p><%= @group.description %></p>
+  </div>
+</div>

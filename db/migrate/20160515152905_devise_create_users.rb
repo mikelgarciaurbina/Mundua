@@ -4,7 +4,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.references :group, index: true
       t.string :name
       t.string :lastname
-      t.string :avatar
 
       ## Database authenticatable
       t.string :email,              null: false, default: ""

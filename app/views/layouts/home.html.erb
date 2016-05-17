@@ -15,50 +15,11 @@
     <p class="alert"><%= alert %></p> -->
     <!-- Header Start -->
     <div class="row header">
-      <!-- Modal -->
-      <div class="modal" id="modal-login" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-header">
-            <a href="#" class="btn-close" aria-hidden="true">×</a>
-          </div>
-          <div class="modal-body js-modal-body">
-          </div>
-        </div>
-      </div>
-      <!-- /Modal -->
+      <%= render partial: "layouts/modal" %>
 
       <!-- Navbar Start -->
       <div class="navbar cf height-auto padding-20 transparent -tablet-padding">
-        <ul class="pull-right menu href-text-white">
-          <li><a href="#"><i class="fa fa-lg fa-support"></i> Help</a></li>
-          <li class="divider"></li>
-          <% if user_signed_in? %>
-            <!-- Dropdown Start -->
-            <li class="dropdown">
-              <a href="#"><i class="fa fa-lg fa-user"></i> <%= current_user.name %></a>
-              <ul class="child">
-                <li><a href="#">First</a></li>
-                <li><a href="#">Second</a></li>
-                <li><a href="#">Fourth</a></li>
-              </ul>
-            </li>
-            <!-- Dropdown Start -->
-            <li class="divider"></li>
-            <li>
-              <%= link_to destroy_user_session_path, method:'DELETE' do %>
-                <i class="fa fa-lg fa-sign-out"></i> Sign out
-              <% end %>
-            </li>
-          <% else %>
-            <li><%= link_to 'Login', new_user_session_path, class: "js-login" %></li>
-            <li class="divider"></li>
-            <li>
-              <%= link_to 'Join Now', new_user_registration_path, class: "fill-blue js-join-now" %>
-            </li>
-          <% end %>
-          <!-- <li><a href="#">About Us</a></li>
-          <li><a class="fill-blue" href="#">Join Now</a></li> -->
-        </ul>
+        <%= render partial: "layouts/nav" %>
       </div>
       <!-- Navbar End -->
 

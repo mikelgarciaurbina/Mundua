@@ -4,7 +4,6 @@ class CreateGroups < ActiveRecord::Migration
       t.references :house, index: true
       t.string :name
       t.text :description
-      t.string :image
       t.string :friends_requests
 
       t.timestamps null: false

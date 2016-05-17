@@ -13,36 +13,14 @@
   <body>
     <!-- <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p> -->
-
+    <%= render partial: "layouts/modal" %>
     <!-- Navbar Start -->
-    <div class="navbar silver">
+    <div class="navbar blue">
       <!-- Brand Start-->
-      <a href="#" class="brand text-white">Brand</a>
+      <%= link_to 'Mundua', root_path, class: "brand text-white" %>
       <!-- Brand End-->
       <!-- Menu Start-->
       <ul class="menu pull-left">
-        <li class="divider"></li>
-        
-        <!-- Dropdown Start -->
-        <li class="dropdown">
-          <a href="#">Dropdown <i class="fa fa-angle-down"></i></a>
-          <ul class="child">
-            <li><a href="#">First</a></li>
-            <li><a href="#">Second</a></li>
-            <li class="dropdown">
-              <a href="#">Dropdown 2 <i class="fa fa-angle-right"></i></a>
-              <ul class="child right">
-                <li><a href="#">First</a></li>
-                <li><a href="#">Second</a></li>
-                <li><a href="#">Third</a></li>
-                <li><a href="#">Fourth</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Fourth</a></li>
-          </ul>
-        </li>
-        <!-- Dropdown Start -->
-
         <li class="divider"></li>
       </ul>
       <!-- Menu End -->
@@ -54,35 +32,7 @@
       </form>
        <!-- Search Form End-->
       
-      <!-- Menu Start -->
-      <ul class="menu pull-right">
-        <li class="divider"></li>
-        <li><a class="active" href="#">Right 1</a></li>
-        <li class="divider"></li>
-        
-        <!-- Dropdown Start -->
-        <li class="dropdown">
-          <a href="#">Dropdown 1 <i class="fa fa-angle-down"></i></a>
-          <ul class="child first left">
-            <li><a href="#">First</a></li>
-            <li><a href="#">Second</a></li>
-            <li class="dropdown">
-              <a href="#"><i class="fa fa-angle-left"></i> Dropdown 2</a>
-              <ul class="child left">
-                <li><a href="#">First</a></li>
-                <li><a href="#">Second</a></li>
-                <li><a href="#">Third</a></li>
-                <li><a href="#">Fourth</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Third</a></li>
-            <li><a href="#">Fourth</a></li>
-          </ul>
-        </li>
-        <!-- Dropdown End -->
-
-      </ul>
-      <!-- Menu End -->
+      <%= render partial: "layouts/nav" %>
       
     </div>
     <!-- Navbar End -->
