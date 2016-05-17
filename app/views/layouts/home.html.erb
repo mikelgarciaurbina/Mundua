@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mundua</title>
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
+    <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modulr.min.css">
+    <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modules/tooltip.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+    <!-- Header Start -->
+    <div class="row header">
+      <!-- Modal -->
+      <div class="modal" id="modal-login" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-header">
+            <a href="#" class="btn-close" aria-hidden="true">×</a>
+          </div>
+          <div class="modal-body js-modal-body">
+          </div>
+        </div>
+      </div>
+      <!-- /Modal -->
+
+      <!-- Navbar Start -->
+      <div class="navbar cf height-auto padding-20 transparent -tablet-padding">
+        <ul class="pull-right menu href-text-white">
+          <li><a href="#"><i class="fa fa-lg fa-support"></i> Help</a></li>
+          <li class="divider"></li>
+          <% if user_signed_in? %>
+            <!-- Dropdown Start -->
+            <li class="dropdown">
+              <a href="#"><i class="fa fa-lg fa-user"></i> <%= current_user.name %></a>
+              <ul class="child">
+                <li><a href="#">First</a></li>
+                <li><a href="#">Second</a></li>
+                <li><a href="#">Fourth</a></li>
+              </ul>
+            </li>
+            <!-- Dropdown Start -->
+            <li class="divider"></li>
+            <li>
+              <%= link_to destroy_user_session_path, method:'DELETE' do %>
+                <i class="fa fa-lg fa-sign-out"></i> Sign out
+              <% end %>
+            </li>
+          <% else %>
+            <li><%= link_to 'Login', new_user_session_path, class: "js-login" %></li>
+            <li class="divider"></li>
+            <li>
+              <%= link_to 'Join Now', new_user_registration_path, class: "fill-blue js-join-now" %>
+            </li>
+          <% end %>
+          <!-- <li><a href="#">About Us</a></li>
+          <li><a class="fill-blue" href="#">Join Now</a></li> -->
+        </ul>
+      </div>
+      <!-- Navbar End -->
+
+      <!-- Row Intro Start -->
+      <div class="row text-center push-top">
+        <h2 class="text-white pull-left width-100">Find the Best Place to Work</h2>
+        <p class="text-white">
+          Where will you feel at home? These are complicated questions with many variables to consider...
+        </p>
+      </div>
+      <!-- Row Intro End -->
+
+      <!-- Search Form Start -->
+      <div class="wrapper960 center">
+        <form class="form l padding-10 cf">
+          <div class="col-10">
+            <input class="border-white -rounded" type="text" placeholder="Search by city, neighborhood, or address...">
+          </div>
+          <div class="col-2">
+            <button class="btn blue width-100">Search</button>
+          </div>
+        </form>
+      </div>
+      <!-- Search Form End -->
+
+    </div>
+    <!-- Header End -->
+    <%= yield %>
+    <%= render partial: "footer" %>        
+  </body>
+</html>

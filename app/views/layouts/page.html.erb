@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mundua</title>
+    <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
+    <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modulr.min.css">
+    <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modules/tooltip.min.css">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
+
+    <!-- Navbar Start -->
+    <div class="navbar silver">
+      <!-- Brand Start-->
+      <a href="#" class="brand text-white">Brand</a>
+      <!-- Brand End-->
+      <!-- Menu Start-->
+      <ul class="menu pull-left">
+        <li class="divider"></li>
+        
+        <!-- Dropdown Start -->
+        <li class="dropdown">
+          <a href="#">Dropdown <i class="fa fa-angle-down"></i></a>
+          <ul class="child">
+            <li><a href="#">First</a></li>
+            <li><a href="#">Second</a></li>
+            <li class="dropdown">
+              <a href="#">Dropdown 2 <i class="fa fa-angle-right"></i></a>
+              <ul class="child right">
+                <li><a href="#">First</a></li>
+                <li><a href="#">Second</a></li>
+                <li><a href="#">Third</a></li>
+                <li><a href="#">Fourth</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Fourth</a></li>
+          </ul>
+        </li>
+        <!-- Dropdown Start -->
+
+        <li class="divider"></li>
+      </ul>
+      <!-- Menu End -->
+      
+      <!-- Search Form Start-->
+      <form class="form purple icon-right">
+        <input class="border-transparent" type="text" placeholder="Search anything..">
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </form>
+       <!-- Search Form End-->
+      
+      <!-- Menu Start -->
+      <ul class="menu pull-right">
+        <li class="divider"></li>
+        <li><a class="active" href="#">Right 1</a></li>
+        <li class="divider"></li>
+        
+        <!-- Dropdown Start -->
+        <li class="dropdown">
+          <a href="#">Dropdown 1 <i class="fa fa-angle-down"></i></a>
+          <ul class="child first left">
+            <li><a href="#">First</a></li>
+            <li><a href="#">Second</a></li>
+            <li class="dropdown">
+              <a href="#"><i class="fa fa-angle-left"></i> Dropdown 2</a>
+              <ul class="child left">
+                <li><a href="#">First</a></li>
+                <li><a href="#">Second</a></li>
+                <li><a href="#">Third</a></li>
+                <li><a href="#">Fourth</a></li>
+              </ul>
+            </li>
+            <li><a href="#">Third</a></li>
+            <li><a href="#">Fourth</a></li>
+          </ul>
+        </li>
+        <!-- Dropdown End -->
+
+      </ul>
+      <!-- Menu End -->
+      
+    </div>
+    <!-- Navbar End -->
+    <%= yield %>
+
+  </body>
+</html>

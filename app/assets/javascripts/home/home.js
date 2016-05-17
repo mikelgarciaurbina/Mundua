@@ -91,7 +91,7 @@ $( document ).ready(function() {
   });
   function loadModal(event, self){
     event.preventDefault();
-    $(".js-modal-body").load(self.attr("href"))
-    $(location).attr('href', '#modal-login')
+    $(".js-modal-body").load(self.attr("href"));
+    $(location).attr('href', '#modal-login');
   }
 });
