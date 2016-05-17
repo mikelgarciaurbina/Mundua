@@ -6,8 +6,9 @@
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
     <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modulr.min.css">
     <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modules/tooltip.min.css">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', params[:controller], media: 'all' %>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <%= javascript_include_tag 'application', params[:controller] %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -38,17 +39,18 @@
     <!-- Navbar End -->
     <div class="row">
       <div class="col-3 padding-top-20 col-persist">
-        <ul class="filter filter-right blue">
-          <li><a class="active" href="/profile">Profile</a></li>
+        <ul class="filter filter-right blue js-profile-nav">
+          <li><a href="/profile">Profile</a></li>
           <% if current_user.group.nil? %>
             <li><%= link_to 'New Group', new_group_path %></li>
           <% else %>
-            <li><%= link_to 'Show Group', group_path(current_user.group) %></li>
+            <li><%= link_to 'Show Group', group_path %></li>
           <% end %>
           <li><%= link_to 'New House', new_house_path %></li>
-          <% if !current_user.group.nil? && !current_user.group.house.nil? %>
-            <li><%= link_to 'Show Group', house_path(current_user.group.house) %></li>
+          <% unless current_user.group.house.nil? %>
+            <li><%= link_to 'Show Group House', group_house_path %></li>
           <% end %>
+          <li><%= link_to 'Show My Houses', my_houses_path %></li>
         </ul>
       </div>
       <div class="col-1"></div>

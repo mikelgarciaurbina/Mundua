@@ -2,6 +2,10 @@ class HousesController < ApplicationController
   layout "profile"
   before_action :auth_user
 
+  def myHouses
+    @houses = House.where("owner_id = ?", current_user)
+  end
+
   def new
     @house = House.new
   end
@@ -11,14 +15,14 @@ class HousesController < ApplicationController
     @house.owner_id = current_user.id
     if @house.save
       flash[:success] = "The house was created!"
-      redirect_to root_path
+      redirect_to my_houses_path
     else
       render 'new'
     end
   end
 
-  def show
-    @house = House.find(params[:id])
+  def groupHouse
+    @house = current_user.group.house
   end
 
   private

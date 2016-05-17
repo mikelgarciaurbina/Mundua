@@ -12,5 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+
+function setNavigation(){
+  $(".js-profile-nav a").each(function(){
+    if(this.href == window.location.href){
+      $(this).toggleClass("active");
+    }
+  });
+}
+
+$( document ).ready(function() {
+  setNavigation();
+});

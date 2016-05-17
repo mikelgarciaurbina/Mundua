@@ -6,9 +6,8 @@
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800">
     <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modulr.min.css">
     <link rel="stylesheet prefetch" href="https://decorator.io/cdn/modules/tooltip.min.css">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= stylesheet_link_tag    'application', params[:controller], media: 'all' %>
+    <%= javascript_include_tag 'application', params[:controller] %>
     <%= csrf_meta_tags %>
   </head>
   <body>
