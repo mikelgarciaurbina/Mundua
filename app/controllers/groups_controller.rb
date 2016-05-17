@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  layout "page", only: [:show]
+  layout "profile"
   before_action :auth_user
 
   def new
@@ -11,8 +11,9 @@ class GroupsController < ApplicationController
     @group.owner_id = current_user.id
     if @group.save
       current_user.group = @group
+      current_user.save
       flash[:success] = "The group was created!"
-      redirect_to root_path
+      redirect_to group_path(@group)
     else
       render 'new'
     end

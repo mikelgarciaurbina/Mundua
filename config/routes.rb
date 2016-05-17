@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :groups, only: [:new, :create, :show ]
-  #get 'products/:id', to 'catalog#view'
+  resources :groups, only: [ :new, :create, :show ]
+  resources :houses, only: [ :new, :create, :show ]
+  resources :users, only: [ :edit, :update ]
+  get '/profile', to: 'users#profile'
 end

@@ -89,13 +89,25 @@ $( document ).ready(function() {
   $(".js-forgot-password").on("click", function(event){
     loadModal(event, $(this));
   });
-  $(".js-new-group").on("click", function(event){
-    loadModal(event, $(this));
-  });
-  function loadModal(event, self){
+  function loadModal(event, self, callback){
     event.preventDefault();
     $(".js-modal-body").load(self.attr("href"), function(){
       $(location).attr('href', '#modal');
+      if (callback)
+        callback();
+    });
+  }
+  function setupAutocomplete(){
+    var input = $('.js-address-search')[0];
+    var autocomplete = new google.maps.places.Autocomplete(input);
+    autocomplete.addListener('place_changed', function(){
+      var place = autocomplete.getPlace();
+      if (place.geometry.location) {
+        $(".js-latitude").val(place.geometry.location.lat());
+        $(".js-longitude").val(place.geometry.location.lng());
+      } else {
+        alert("The place has no location...?")
+      }
     });
   }
 });

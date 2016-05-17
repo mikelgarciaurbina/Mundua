@@ -1,0 +1,12 @@
+<div class="media">
+  <div class="media-left">
+    <%= link_to image_tag(@house.image.url, class: 'media-object'), @house.image.url, target: '_blank' %>
+  </div>
+  <div class="media-body">
+    <h4 class="media-heading"><%= @house.address %></h4>
+    <p><%= @house.latitude %></p>
+    <p><%= @house.longitude %></p>
+    <p><%= @house.rooms %></p>
+    <p><%= @house.description %></p>
+  </div>
+</div>

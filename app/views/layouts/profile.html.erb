@@ -36,7 +36,25 @@
       
     </div>
     <!-- Navbar End -->
-    <%= yield %>
-
+    <div class="row">
+      <div class="col-3 padding-top-20 col-persist">
+        <ul class="filter filter-right blue">
+          <li><a class="active" href="/profile">Profile</a></li>
+          <% if current_user.group.nil? %>
+            <li><%= link_to 'New Group', new_group_path %></li>
+          <% else %>
+            <li><%= link_to 'Show Group', group_path(current_user.group) %></li>
+          <% end %>
+          <li><%= link_to 'New House', new_house_path %></li>
+          <% if !current_user.group.nil? && !current_user.group.house.nil? %>
+            <li><%= link_to 'Show Group', house_path(current_user.group.house) %></li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-7 offset-left-1 padding-20">
+        <%= yield %>
+      </div>
+    </div>
   </body>
 </html>
