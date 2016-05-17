@@ -28,6 +28,10 @@ gem 'devise'
 
 gem "paperclip", "~> 4.2"
 
+gem "bower-rails", "~> 0.10.0"
+
+gem "font-awesome-rails"
+
 gem 'rails_12factor', group: :production
 
 group :development, :test do

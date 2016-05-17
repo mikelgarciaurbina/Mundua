@@ -10,6 +10,13 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require modulr/modulr.min.css
+ *= require modulr/tooltip.min.css
  *= require_tree .
  *= require_self
+ *= require font-awesome
  */
+
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700,800");
+/*@import "modulr/modulr.min.css";
+@import "modulr/tooltip.min.css";*/
