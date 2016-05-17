@@ -20,23 +20,26 @@ $( document ).ready(function() {
   }
 
   function cityToHTML(city) {
+    var red = "#EA4335";
+    var green = "#2AA583";
+    var blue = "#15a3ff";
     var lat = city.info.location.latitude;
     var long = city.info.location.longitude;
     var cost = city.cost.beer_in_cafe.USD * 100 / 5;
     cost = (cost > 95) ? 95 : cost;
-    var costColor = (cost > 50) ? "red" : "green";
+    var costColor = (cost > 50) ? red : green;
     var temperature = city.info.weather.temperature.celsius * 100 / 50;
     temperature = (temperature > 95) ? 95 : temperature;
-    var temperatureColor = (temperature < 33) ? "blue" : (temperature < 66) ? "green" : "red";
+    var temperatureColor = (temperature < 33) ? blue : (temperature < 66) ? green : red;
     var air = city.info.weather.humidity.value * 100;
     air = (air > 95) ? 95 : air;
-    var airColor = (air < 33) ? "blue" : (air < 66) ? "green" : "red";
+    var airColor = (air < 33) ? blue : (air < 66) ? green : red;
     var fun = city.scores.nightlife * 100;
     fun = (fun > 95) ? 95 : fun;
-    var funColor = (fun > 50) ? "green" : "red";
+    var funColor = (fun > 50) ? green : red;
     var safety = city.scores.safety * 100;
     safety = (safety > 95) ? 95 : safety;
-    var safetyColor = (safety > 50) ? "green" : "red";
+    var safetyColor = (safety > 50) ? green : red;
     return '' +
       '<div class="col-4">' +
       '<div class="bg">' +
