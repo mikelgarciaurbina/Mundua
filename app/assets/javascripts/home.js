@@ -1,10 +1,11 @@
 $( document ).ready(function() {
   var url_base_nomadlist = "https://nomadlist.com/"
-
-  $.ajax({
-    url: url_base_nomadlist + "api/v2/list/cities",
-    success: handleRecords
-  });
+  if(window.location.pathname == "/"){
+    $.ajax({
+      url: url_base_nomadlist + "api/v2/list/cities",
+      success: handleRecords
+    });
+  }
 
   function handleRecords(cities) {
     var random = Math.floor((Math.random() * 10));
