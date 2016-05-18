@@ -39,13 +39,13 @@ ActiveRecord::Schema.define(version: 20160517102444) do
   end
 
   create_table "houses", force: :cascade do |t|
-    t.string   "latitude"
-    t.string   "longitude"
+    t.decimal  "latitude",           precision: 20, scale: 12
+    t.decimal  "longitude",          precision: 20, scale: 12
     t.string   "address"
     t.integer  "rooms"
     t.text     "description"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.integer  "owner_id"
     t.string   "image_file_name"
     t.string   "image_content_type"

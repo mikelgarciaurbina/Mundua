@@ -1,8 +1,8 @@
 class CreateHouses < ActiveRecord::Migration
   def change
     create_table :houses do |t|
-      t.string :latitude
-      t.string :longitude
+      t.decimal :latitude, precision: 20, scale: 12
+      t.decimal :longitude, precision: 20, scale: 12
       t.string :address
       t.integer :rooms
       t.text :description
