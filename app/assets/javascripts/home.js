@@ -43,41 +43,44 @@ $( document ).ready(function() {
     var safetyColor = (safety > 50) ? green : red;
     return '' +
       '<div class="col-4 padding-bottom-20">' +
-      '<div class="bg">' +
-        '<img src="' + url_base_nomadlist + city.media.image[500] + '" alt="">' +
-        '<div class="bg-text">' +
-          '<p class="wifi"><i class="fa fa-wifi" aria-hidden="true"></i> ' +
-            city.info.internet.speed.download + ' Mbps.</p>' +
-          '<h3 class="citi">' + city.info.city.name + '</h3>' +
-          '<p>' + city.info.country.name + '</p>' +
-          '<p class="weather"><i class="fa fa-cloud" aria-hidden="true"></i> ' +
-            city.info.weather.temperature.celsius + 'ºC</p>' +
-          '<p class="salary">' + city.cost.longTerm.USD + '$</p>' +
-        '</div>' +
-        '<div class="overlay">' +
-          '<div class="row">' +
-            '<div class="col-4">' +
-              '<p>Cost</p>' +
-              '<p>Weather</p>' +
-              '<p>Air</p>' +
-              '<p>Fun</p>' +
-              '<p>Safety</p>' +
-            '</div>' +
-            '<div class="col-8">' +
-              '<p class="progressbar"><span class="real-progressbar"' +
-                'style="background: ' + costColor + ';width: ' + cost + '%;"></span></p>' +
-              '<p class="progressbar"><span class="real-progressbar"' +
-                ' style="background: ' + temperatureColor + ';width: ' + temperature + '%;"></span></p>' +
-              '<p class="progressbar"><span class="real-progressbar"' +
-                ' style="background: ' + airColor + ';width: ' + air + '%;"></span></p>' +
-              '<p class="progressbar"><span class="real-progressbar"' +
-                ' style="background: ' + funColor + ';width: ' + fun + '%;"></span></p>' +
-              '<p class="progressbar"><span class="real-progressbar"' +
-                ' style="background: ' + safetyColor + ';width: ' + safety + '%;"></span></p>' +
+      '<a href="/search?lat=' + city.info.location.latitude +
+               '&lng=' + city.info.location.longitude + '">' + 
+        '<div class="bg">' +
+          '<img src="' + url_base_nomadlist + city.media.image[500] + '" alt="">' +
+          '<div class="bg-text">' +
+            '<p class="wifi"><i class="fa fa-wifi" aria-hidden="true"></i> ' +
+              city.info.internet.speed.download + ' Mbps.</p>' +
+            '<h3 class="citi">' + city.info.city.name + '</h3>' +
+            '<p>' + city.info.country.name + '</p>' +
+            '<p class="weather"><i class="fa fa-cloud" aria-hidden="true"></i> ' +
+              city.info.weather.temperature.celsius + 'ºC</p>' +
+            '<p class="salary">' + city.cost.longTerm.USD + '$</p>' +
+          '</div>' +
+          '<div class="overlay">' +
+            '<div class="row">' +
+              '<div class="col-4">' +
+                '<p>Cost</p>' +
+                '<p>Weather</p>' +
+                '<p>Air</p>' +
+                '<p>Fun</p>' +
+                '<p>Safety</p>' +
+              '</div>' +
+              '<div class="col-8">' +
+                '<p class="progressbar"><span class="real-progressbar"' +
+                  'style="background: ' + costColor + ';width: ' + cost + '%;"></span></p>' +
+                '<p class="progressbar"><span class="real-progressbar"' +
+                  ' style="background: ' + temperatureColor + ';width: ' + temperature + '%;"></span></p>' +
+                '<p class="progressbar"><span class="real-progressbar"' +
+                  ' style="background: ' + airColor + ';width: ' + air + '%;"></span></p>' +
+                '<p class="progressbar"><span class="real-progressbar"' +
+                  ' style="background: ' + funColor + ';width: ' + fun + '%;"></span></p>' +
+                '<p class="progressbar"><span class="real-progressbar"' +
+                  ' style="background: ' + safetyColor + ';width: ' + safety + '%;"></span></p>' +
+              '</div>' +
             '</div>' +
           '</div>' +
         '</div>' +
-      '</div>' +
+      '</a>' +
     '</div>';
   }
 

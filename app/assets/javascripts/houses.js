@@ -12,6 +12,6 @@ $( document ).ready(function() {
       }
     });
   }
-  if (window.location.pathname == "/houses/new")
+  //if (window.location.pathname == "/houses/new")
     setupAutocomplete();
 });

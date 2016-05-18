@@ -3,6 +3,7 @@
   <head>
     <title>Mundua</title>
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <%= javascript_include_tag 'application' %>
     <%= csrf_meta_tags %>
   </head>
@@ -30,9 +31,11 @@
 
       <!-- Search Form Start -->
       <div class="wrapper960 center">
-        <form class="form l padding-10 cf">
+        <form class="form l padding-10 cf" action="<%= search_path %>"  method="get">
           <div class="col-10">
-            <input class="border-white -rounded" type="text" placeholder="Search by city, neighborhood, or address...">
+            <input class="js-latitude" name="lat" type="hidden">
+            <input class="js-longitude" name="lng" type="hidden">
+            <input class="border-white -rounded js-address-search" type="text" placeholder="Search by city, neighborhood, or address...">
           </div>
           <div class="col-2">
             <button class="btn blue width-100">Search</button>

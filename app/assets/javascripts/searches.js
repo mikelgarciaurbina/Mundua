@@ -36,8 +36,6 @@ $( document ).ready(function() {
       })
     });
 
-    addMarkerToMap();
-
     map.on('singleclick', function(evt) {
       var coordinate = evt.coordinate;
       var feature = map.forEachFeatureAtPixel(evt.pixel,
@@ -45,7 +43,12 @@ $( document ).ready(function() {
             return feature;
           });
       if (feature) {
-        content.innerHTML = feature.U.name;
+        content.innerHTML = '' +
+          '<img class="pull-left width-100 padding-top-5" src="' +
+            feature.U.image + '" />' +
+          '<h5 class="text-15 text700 pull-left padding-top-5">' + 
+            feature.U.address + 
+          '</h5>';
         overlay.setPosition(coordinate);
       }
     });
@@ -74,34 +77,96 @@ $( document ).ready(function() {
     });
 
     function handleRecords(houses) {
-      console.log(houses);
-    }
-    function addMarkerToMap(){
-      var iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.transform([eval($(".js-lng").text()), eval($(".js-lat").text())], 'EPSG:4326', 'EPSG:3857')),
-        name: 'Null Island',
-        population: 4000,
-        rainfall: 500
+      var markers = [];
+      houses.forEach(function (house, index, array) {
+         markers.push(createMarker(house));
       });
-      var iconStyle = new ol.style.Style({
-        image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
-          anchor: [0.5, 40],
-          anchorXUnits: 'fraction',
-          anchorYUnits: 'pixels',
-          opacity: 0.9,
-          src: '/images/marker.svg'
-        }))
-      });
-      iconFeature.setStyle(iconStyle);
 
       var vectorSource = new ol.source.Vector({
-        features: [iconFeature]
+        features: markers
       });
 
       var vectorLayer = new ol.layer.Vector({
         source: vectorSource
       });
       map.addLayer(vectorLayer);
+
+      $('.js-houses-list-search').html(getHousesFromResponse(houses));
+    }
+
+    var iconStyle = new ol.style.Style({
+      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+        anchor: [0.5, 40],
+        anchorXUnits: 'fraction',
+        anchorYUnits: 'pixels',
+        opacity: 0.9,
+        src: '/images/marker.svg'
+      }))
+    });
+
+    function createMarker(house){
+      var iconFeature = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.transform([eval(house.longitude), eval(house.latitude)], 'EPSG:4326', 'EPSG:3857')),
+        house_id: house.id,
+        image: house.image_url,
+        rooms: house.rooms,
+        address: house.address
+      });
+      
+      iconFeature.setStyle(iconStyle);
+
+      return iconFeature;
+    }
+
+    function getHousesFromResponse(houses) {
+      return houses.reduce(function(result, house) {
+        result += houseToHTML(house);
+        return result;
+      },'');
+    }
+
+    function houseToHTML(house) {
+      var color = "";
+      if(house.users_count == 0) {
+        color = "light-green";
+      } else if(house.users_count >= house.rooms){
+        color = "red";
+      } else {
+        color = "orange";
+      }
+      return '' +
+        '<div class="col-6">' +
+        '<div class="item white shadow cf">' +
+            '<div class="row padding">' +
+              '<div class="col-11 col-persist gutter-h-10 padding-top-5">' +
+                '<h5 class="text-15 text700 pull-left">' + 
+                  house.address + 
+                '</h5>' +
+              '</div>' +
+            '</div>' +
+            '<div class="row">' +
+             '<img class="pull-left width-100" src="' + house.image_url + '" />' +
+            '</div>' +
+            '<div class="row padding">' +
+              '<div class="pull-left">' +
+                '<a class="btn icon round text-' + color + ' fill-silver">' +
+                  '<i class="fa fa-bed"></i>' +
+                '</a>' +
+                '<a class="btn white hover-disable text-' + color + ' text600">' +
+                  house.rooms +
+                '</a>' +
+              '</div>' +
+              '<div class="pull-right">' +
+                '<a class="btn icon round text-gray hover-text-red">' +
+                  '<i class="fa fa-users"></i>' +
+                '</a>' +
+                '<a class="btn white hover-disable text-gray text600">' +
+                  house.groups_count +
+                '</a>' +
+              '</div>' +
+            '</div>' +
+        '</div>' +
+      '</div>';
     }
   }
 });
