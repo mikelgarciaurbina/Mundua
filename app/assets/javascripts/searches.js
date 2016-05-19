@@ -155,17 +155,22 @@ $( document ).ready(function() {
         '<div class="item white shadow cf">' +
             '<div class="row padding">' +
               '<div class="col-11 col-persist gutter-h-10 padding-top-5 title-height">' +
-                '<h5 class="text-15 text700 pull-left">' + 
-                  house.address + 
+                '<h5 class="text-15 text700 pull-left">' +
+                  '<a href="/houses/' + house.id + '" class="black-gray">' +
+                    house.address + 
+                  '</a>' +
                 '</h5>' +
               '</div>' +
             '</div>' +
             '<div class="row img-height">' +
-             '<img class="pull-left width-100" src="' + house.image_url + '" />' +
+              '<a href="/houses/' + house.id + '" class="black-gray">' +
+                '<img class="pull-left width-100" src="' + house.image_url + '" />' +
+              '</a>' +
             '</div>' +
             '<div class="row padding">' +
               '<div class="pull-left">' +
-                '<a class="btn icon round text-' + color + ' fill-silver">' +
+                '<a href="/houses/' + house.id + '" class="btn icon round text-' +
+                  color + ' fill-silver">' +
                   '<i class="fa fa-bed"></i>' +
                 '</a>' +
                 '<a class="btn white hover-disable text-' + color + ' text600">' +
@@ -173,7 +178,7 @@ $( document ).ready(function() {
                 '</a>' +
               '</div>' +
               '<div class="pull-right">' +
-                '<a class="btn icon round text-gray hover-text-red">' +
+                '<a href="/houses/' + house.id + '" class="btn icon round text-gray hover-text-red">' +
                   '<i class="fa fa-users"></i>' +
                 '</a>' +
                 '<a class="btn white hover-disable text-gray text600">' +

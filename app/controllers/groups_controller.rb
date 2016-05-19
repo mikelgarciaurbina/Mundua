@@ -23,6 +23,18 @@ class GroupsController < ApplicationController
     @group = current_user.group
   end
 
+  def join_group
+    group = Group.find(params[:group][:id])
+    if group.friends_requests.nil?
+      group.friends_requests = current_user.id
+    else
+      group.friends_requests += ", #{current_user.id}"
+    end
+    group.save
+    flash[:success] = "The request has sent!"
+    redirect_to house_path(group.house)
+  end
+
   private
     def group_params
       params.require(:group).permit(:image, :name, :description)

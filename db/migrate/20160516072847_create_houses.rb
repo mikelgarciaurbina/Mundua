@@ -6,6 +6,7 @@ class CreateHouses < ActiveRecord::Migration
       t.string :address
       t.integer :rooms
       t.text :description
+      t.string :groups_requests
 
       t.timestamps null: false
     end

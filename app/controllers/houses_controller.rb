@@ -1,6 +1,6 @@
 class HousesController < ApplicationController
-  layout "profile"
-  before_action :auth_user
+  layout "profile", except: [:show]
+  before_action :auth_user, except: [:show]
 
   def myHouses
     @houses = House.where("owner_id = ?", current_user)
@@ -8,6 +8,11 @@ class HousesController < ApplicationController
 
   def new
     @house = House.new
+  end
+
+  def show
+    @house = House.find(params[:id])
+    render layout: "search"
   end
 
   def create
@@ -21,8 +26,15 @@ class HousesController < ApplicationController
     end
   end
 
-  def groupHouse
+  def group_house
     @house = current_user.group.house
+  end
+
+  def join_house
+    house = House.find(params[:house][:id])
+    house.groups.push(current_user.group)
+    flash[:success] = "The group was joined!"
+    redirect_to house_path(house)
   end
 
   private

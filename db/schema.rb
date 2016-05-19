@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160517102444) do
     t.string   "address"
     t.integer  "rooms"
     t.text     "description"
+    t.string   "groups_requests"
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
     t.integer  "owner_id"

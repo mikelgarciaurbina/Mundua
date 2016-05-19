@@ -5,9 +5,11 @@ Rails.application.routes.draw do
 
   resources :groups, only: [ :new, :create ]
   get '/group', to: 'groups#show'
-  resources :houses, only: [ :new, :create ]
+  post '/join-group', to: 'groups#join_group'
+  resources :houses, only: [ :new, :create, :show ]
   get '/my-houses', to: 'houses#myHouses'
-  get '/group-house', to: 'houses#groupHouse'
+  get '/group-house', to: 'houses#group_house'
+  post '/join-house', to: 'houses#join_house'
   resources :users, only: [ :edit, :update ]
   get '/profile', to: 'users#profile'
   get '/search', to: 'searches#search'

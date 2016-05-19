@@ -1,3 +1,68 @@
 // Place all the styles related to the houses controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.thumbnail{
+  float: left;
+  width: 100%;
+}
+.lh p,
+.lh .margin-top{
+  padding-left: 2px;
+}
+.w35{
+  width: 35px;
+}
+
+/* __ rating __ */
+
+.rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  text-align: left;
+  margin: 2px 0 5px 0;
+}
+.rating a, 
+.rating span{
+  font-size: 21px;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1em;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+   color: #FF5722;
+   cursor: pointer;
+}
+.rating .a{
+  color: #FF5722;
+}
+
+/* __ table edits __ */
+
+.action{
+  visibility: hidden;
+}
+table tr:hover .action{
+  visibility: visible;
+}
+table td, table th {
+  border-top: 1px solid #eee;
+  padding: 8px;
+}
+
+/* __ modifiers __ */
+
+.shadow{
+  box-shadow: 0 0 6px rgba(0,0,0,0.27);
+}
+.shadow2{
+  box-shadow: 0 0 4px #8d8d8d;
+}
+.position{
+  margin: 0px auto;
+}

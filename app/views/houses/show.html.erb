@@ -1,0 +1,123 @@
+<div class="row">
+  <div class="col-6 padding-20">
+    <div class="position white shadow cf">
+      <div class="row padding-20">
+        <div class="col-9">
+          <h4><%= @house.address %></h4>
+        </div>
+        <div class="col-3 rating">
+          <span>☆</span><span>☆</span><span class="a">☆</span><span  class="a">☆</span><span  class="a">☆</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 tablet-col-persist shadow2">
+          <img class="thumbnail" src="<%= @house.image.url %>"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 padding-20">
+          <p><span class="text-strong">Rooms:</span> <%= @house.rooms %></p>
+          <p><span class="text-strong">Description:</span> <%= @house.description %></p>
+        </div>
+      </div>
+      <% if user_can_join_group_in_house?(@house) %>
+        <div class="row">
+          <div class="col-3 padding-left-20 padding-bottom-20">
+            <%= form_for @house, url: {action: "join_house"}, method: :post do |f| %>
+              <%= f.hidden_field :id %>
+              <%= f.submit "Join my group", class: "btn blue width-100" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-6 padding-20">
+    <div class="position white shadow cf">
+      <div class="row padding-20">
+        <div class="col-12">
+          <h4>Groups in this house:</h4>
+        </div>
+      </div>
+      <hr>
+      <% if @house.groups.length > 0 %>
+        <% @house.groups.each do |group| %>
+          <div class="row padding-20">
+            <div class="col-9">
+              <h5><%= group.name %></h5>
+            </div>
+            <div class="col-3 rating">
+              <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span class="a">☆</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-4 tablet-col-persist shadow2">
+              <img class="thumbnail" src="<%= group.image.url %>"/>
+            </div>
+            <div class="col-8 tablet-col-persist padding-left-20 lh">
+              <p><span class="text-strong">Users in group:</span> <%= group.users.length %></p>
+              <p><span class="text-strong">Description:</span> <%= group.description %></p>
+            </div>
+          </div>
+          <% if user_can_join_to_group?(group) %>
+            <div class="row">
+              <div class="col-3 padding-left-20 padding-top-20">
+                <%= form_for group, url: {action: "join_group",controller: :groups}, method: :post do |f| %>
+                  <%= f.hidden_field :id %>
+                  <%= f.submit "Join to group", class: "btn blue width-100" %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+          <div class="row">
+            <div class="col-12">
+              <h5 class="padding-20">Users</h5>
+            </div>
+          </div>
+          <div class="row padding-20">
+            <table class="hover">
+              <thead>
+                <tr class="text-13">
+                  <th>Name</th>
+                  <th>Technologies</th>
+                  <th>Hobbies</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% group.users.each do |user| %>
+                  <tr>
+                    <td><%= user.name %> <%= user.lastname %></td>
+                    <td>
+                      <% user.technologies.each do |technology| %>
+                        <a href="javascript:;" class="label orange-red hover-tooltip">
+                          <span class="tooltip top text-capitalize"><%= technology.name %></span>
+                          <%= technology.name %>
+                        </a>
+                      <% end %>
+                    </td>
+                    <td>
+                      <ul>
+                        <% user.hobbies.each do |hobby| %>
+                          <li><%= hobby.name %></li>
+                        <% end %>
+                      </ul>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <% unless @house.groups[@house.groups.length - 1] == group %>
+            <hr>
+          <% end %>
+        <% end %>
+      <% else %>
+        <div class="row">
+          <div class="col-12 padding-20">
+            <h4>This house has not groups</h4>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
