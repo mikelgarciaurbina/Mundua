@@ -5,13 +5,13 @@ $( document ).ready(function() {
     var content = document.getElementById('popup-content');
     var closer = document.getElementById('popup-closer');
 
-    var overlay = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    var overlay = new ol.Overlay({
       element: container,
       autoPan: true,
       autoPanAnimation: {
         duration: 250
       }
-    }));
+    });
 
     closer.onclick = function() {
       overlay.setPosition(undefined);
@@ -53,30 +53,43 @@ $( document ).ready(function() {
       }
     });
     // change mouse cursor when over marker
-    map.on('pointermove', function(e) {
-      var pixel = map.getEventPixel(e.originalEvent);
+    map.on('pointermove', function(evt) {
+      var pixel = map.getEventPixel(evt.originalEvent);
       var hit = map.hasFeatureAtPixel(pixel);
       map.getViewport().style.cursor = hit ? 'pointer' : '';
     });
 
-    var extent = map.getView().calculateExtent(map.getSize());
-    var point1 = ol.proj.transform([extent[0], extent[1]], 'EPSG:3857', 'EPSG:4326');
-    var point2 = ol.proj.transform([extent[2], extent[3]], 'EPSG:3857', 'EPSG:4326');
-    var data = [point1[0], point1[1], point2[0], point2[1]];
-    $.ajax({
-      url: '/api/v1/houses',
-      dataType: 'json',
-      type: 'GET',
-      data: {
-        coordinates: data
-      },
-      success: handleRecords,
-      error: function() {
-        console.log("Error");
-      }
+    map.on('moveend', function(evt) {
+      getHousesFromApi();
     });
 
-    function handleRecords(houses) {
+    function getMapExtent(){
+      var extent = map.getView().calculateExtent(map.getSize());
+      var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
+          'EPSG:3857', 'EPSG:4326');
+      var topRight = ol.proj.transform(ol.extent.getTopRight(extent),
+          'EPSG:3857', 'EPSG:4326');
+      return [bottomLeft[0], bottomLeft[1], topRight[0], topRight[1]];
+    }
+
+    getHousesFromApi();
+
+    function getHousesFromApi(){
+      $.ajax({
+        url: '/api/v1/houses',
+        dataType: 'json',
+        type: 'GET',
+        data: {
+          coordinates: getMapExtent()
+        },
+        success: handleHouses,
+        error: function() {
+          console.log("Error");
+        }
+      });
+    }
+
+    function handleHouses(houses) {
       var markers = [];
       houses.forEach(function (house, index, array) {
          markers.push(createMarker(house));
@@ -89,19 +102,22 @@ $( document ).ready(function() {
       var vectorLayer = new ol.layer.Vector({
         source: vectorSource
       });
+      var layers = map.getLayers();
+      if(layers.a[1])
+        map.removeLayer(layers.a[1]);
       map.addLayer(vectorLayer);
 
       $('.js-houses-list-search').html(getHousesFromResponse(houses));
     }
 
     var iconStyle = new ol.style.Style({
-      image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+      image: new ol.style.Icon({
         anchor: [0.5, 40],
         anchorXUnits: 'fraction',
         anchorYUnits: 'pixels',
         opacity: 0.9,
         src: '/images/marker.svg'
-      }))
+      })
     });
 
     function createMarker(house){
@@ -138,13 +154,13 @@ $( document ).ready(function() {
         '<div class="col-6">' +
         '<div class="item white shadow cf">' +
             '<div class="row padding">' +
-              '<div class="col-11 col-persist gutter-h-10 padding-top-5">' +
+              '<div class="col-11 col-persist gutter-h-10 padding-top-5 title-height">' +
                 '<h5 class="text-15 text700 pull-left">' + 
                   house.address + 
                 '</h5>' +
               '</div>' +
             '</div>' +
-            '<div class="row">' +
+            '<div class="row img-height">' +
              '<img class="pull-left width-100" src="' + house.image_url + '" />' +
             '</div>' +
             '<div class="row padding">' +
