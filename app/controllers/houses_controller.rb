@@ -32,8 +32,13 @@ class HousesController < ApplicationController
 
   def join_house
     house = House.find(params[:house][:id])
-    house.groups.push(current_user.group)
-    flash[:success] = "The group was joined!"
+    if house.groups_requests.nil?
+      house.groups_requests = current_user.id
+    else
+      house.groups_requests += ", #{current_user.id}"
+    end
+    house.save
+    flash[:success] = "The request has sent!"
     redirect_to house_path(house)
   end
 
