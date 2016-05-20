@@ -1,10 +1,10 @@
-$( document ).ready(function() {
-  //TODO refactor
+document.addEventListener('DOMContentLoaded', function() {
   function setupAutocomplete(){
-    var autocomplete = new google.maps.places.Autocomplete($('.js-address-search')[0]);
+    var searchAddress = document.getElementsByClassName("js-address-search")
+    var autocomplete = new google.maps.places.Autocomplete(searchAddress[0]);
     autocomplete.addListener('place_changed', onPlaceChanged);
-    if($('.js-address-search')[1]){
-      var autocomplete2 = new google.maps.places.Autocomplete($('.js-address-search')[1]);
+    if(searchAddress[1]){
+      var autocomplete2 = new google.maps.places.Autocomplete(searchAddress[1]);
       autocomplete2.addListener('place_changed', onPlaceChanged);
     }
   }
@@ -12,8 +12,14 @@ $( document ).ready(function() {
   function onPlaceChanged(){
     var place = this.getPlace();
     if (place.geometry.location) {
-      $(".js-latitude").val(place.geometry.location.lat());
-      $(".js-longitude").val(place.geometry.location.lng());
+      var latitude = document.getElementsByClassName("js-latitude");
+      Array.prototype.forEach.call(latitude, function(element) {
+        element.value = place.geometry.location.lat();
+      });
+      var longitude = document.getElementsByClassName("js-longitude");
+      Array.prototype.forEach.call(longitude, function(element) {
+        element.value = place.geometry.location.lng();
+      });
     } else {
       alert("The place has no location...?")
     }

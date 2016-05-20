@@ -1,5 +1,5 @@
 var map;
-$( document ).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
   if(window.location.pathname == "/search"){
     var container = document.getElementById('popup');
     var content = document.getElementById('popup-content');
@@ -18,7 +18,8 @@ $( document ).ready(function() {
       closer.blur();
       return false;
     };
-
+    var longitude = document.getElementsByClassName("js-lng")[0].innerText;
+    var latitude = document.getElementsByClassName("js-lat")[0].innerText;
     map = new ol.Map({
       layers: [
         new ol.layer.Tile({ 
@@ -31,7 +32,8 @@ $( document ).ready(function() {
       target: 'map',
       controls: [],
       view: new ol.View({
-        center: ol.proj.transform([eval($(".js-lng").text()), eval($(".js-lat").text())], 'EPSG:4326', 'EPSG:3857'),
+        center: ol.proj.transform([eval(longitude),
+          eval(latitude)], 'EPSG:4326', 'EPSG:3857'),
         zoom: 12
       })
     });
@@ -44,11 +46,15 @@ $( document ).ready(function() {
           });
       if (feature) {
         content.innerHTML = '' +
-          '<img class="pull-left width-100 padding-top-5" src="' +
+          '<a href="/houses/' + feature.U.house_id + '" class="black-gray">' +
+            '<img class="pull-left width-100 padding-top-5" src="' +
             feature.U.image + '" />' +
-          '<h5 class="text-15 text700 pull-left padding-top-5">' + 
-            feature.U.address + 
-          '</h5>';
+          '</a>' +
+          '<a href="/houses/' + feature.U.house_id + '" class="black-gray">' +
+            '<h5 class="text-15 text700 pull-left padding-top-5">' +
+              feature.U.address + 
+            '</h5>' +
+          '</a>';
         overlay.setPosition(coordinate);
       }
     });
@@ -72,21 +78,8 @@ $( document ).ready(function() {
       return [bottomLeft[0], bottomLeft[1], topRight[0], topRight[1]];
     }
 
-    getHousesFromApi();
-
     function getHousesFromApi(){
-      $.ajax({
-        url: '/api/v1/houses',
-        dataType: 'json',
-        type: 'GET',
-        data: {
-          coordinates: getMapExtent()
-        },
-        success: handleHouses,
-        error: function() {
-          console.log("Error");
-        }
-      });
+      Mundua.getHousesInApi(getMapExtent()).then(handleHouses);
     }
 
     function handleHouses(houses) {
@@ -107,7 +100,8 @@ $( document ).ready(function() {
         map.removeLayer(layers.a[1]);
       map.addLayer(vectorLayer);
 
-      $('.js-houses-list-search').html(getHousesFromResponse(houses));
+      document.getElementsByClassName("js-houses-list-search")[0].innerHTML =
+        getHousesFromResponse(houses);
     }
 
     var iconStyle = new ol.style.Style({
@@ -122,7 +116,8 @@ $( document ).ready(function() {
 
     function createMarker(house){
       var iconFeature = new ol.Feature({
-        geometry: new ol.geom.Point(ol.proj.transform([eval(house.longitude), eval(house.latitude)], 'EPSG:4326', 'EPSG:3857')),
+        geometry: new ol.geom.Point(ol.proj.transform([eval(house.longitude),
+          eval(house.latitude)], 'EPSG:4326', 'EPSG:3857')),
         house_id: house.id,
         image: house.image_url,
         rooms: house.rooms,
@@ -154,7 +149,8 @@ $( document ).ready(function() {
         '<div class="col-6">' +
         '<div class="item white shadow cf">' +
             '<div class="row padding">' +
-              '<div class="col-11 col-persist gutter-h-10 padding-top-5 title-height">' +
+              '<div class="col-11 col-persist gutter-h-10 padding-top-5' +
+                ' title-height">' +
                 '<h5 class="text-15 text700 pull-left">' +
                   '<a href="/houses/' + house.id + '" class="black-gray">' +
                     house.address + 
@@ -164,21 +160,24 @@ $( document ).ready(function() {
             '</div>' +
             '<div class="row img-height">' +
               '<a href="/houses/' + house.id + '" class="black-gray">' +
-                '<img class="pull-left width-100" src="' + house.image_url + '" />' +
+                '<img class="pull-left width-100" src="' + house.image_url +
+                  '" />' +
               '</a>' +
             '</div>' +
             '<div class="row padding">' +
               '<div class="pull-left">' +
-                '<a href="/houses/' + house.id + '" class="btn icon round text-' +
-                  color + ' fill-silver">' +
+                '<a href="/houses/' + house.id + '" class="btn icon round' +
+                  ' text-' + color + ' fill-silver">' +
                   '<i class="fa fa-bed"></i>' +
                 '</a>' +
-                '<a class="btn white hover-disable text-' + color + ' text600">' +
+                '<a class="btn white hover-disable text-' +
+                  color + ' text600">' +
                   house.rooms +
                 '</a>' +
               '</div>' +
               '<div class="pull-right">' +
-                '<a href="/houses/' + house.id + '" class="btn icon round text-gray hover-text-red">' +
+                '<a href="/houses/' + house.id + '" class="btn icon round' +
+                  ' text-gray hover-text-red">' +
                   '<i class="fa fa-users"></i>' +
                 '</a>' +
                 '<a class="btn white hover-disable text-gray text600">' +
