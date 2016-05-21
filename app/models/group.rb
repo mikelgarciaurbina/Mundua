@@ -12,4 +12,7 @@ class Group < ActiveRecord::Base
               original: ['1000x500>', :jpg] },
     convert_options: { thumb: "-quality 75 -strip",
                        original: "-quality 85 -strip" }
+
+  validates :name, presence: true
+  validates :description, presence: true, length: { minimum: 10 }
 end

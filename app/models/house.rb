@@ -12,6 +12,12 @@ class House < ActiveRecord::Base
     convert_options: { thumb: "-quality 75 -strip",
                        original: "-quality 85 -strip" }
 
+  validates :latitude, presence: true
+  validates :longitude, presence: true
+  validates :address, presence: true
+  validates :rooms, presence: true
+  validates :description, presence: true, length: { minimum: 10 }
+
   def as_json(options={})
     super(except: [:created_at, :updated_at, :owner_id, :image_content_type,
       :image_file_size, :image_updated_at, :image_file_name],

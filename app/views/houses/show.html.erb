@@ -86,7 +86,7 @@
               <tbody>
                 <% group.users.each do |user| %>
                   <tr>
-                    <td><%= user.name %> <%= user.lastname %></td>
+                    <td><%= full_name(user) %></td>
                     <td>
                       <% user.technologies.each do |technology| %>
                         <a href="javascript:;" class="label orange-red hover-tooltip">

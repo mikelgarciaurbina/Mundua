@@ -30,8 +30,11 @@ class GroupsController < ApplicationController
     else
       group.friends_requests += ", #{current_user.id}"
     end
-    group.save
-    flash[:success] = "The request has sent!"
+    if group.save
+      flash[:success] = "The request has sent!"
+    else
+      flash[:error] = "The request has not sent!"
+    end
     redirect_to house_path(group.house)
   end
 

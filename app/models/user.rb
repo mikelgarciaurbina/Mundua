@@ -9,4 +9,6 @@ class User < ActiveRecord::Base
   has_many :hobbies, through: :userHobbies
   has_many :userTechnologies
   has_many :technologies, through: :userTechnologies
+
+  validates :name, presence: true
 end

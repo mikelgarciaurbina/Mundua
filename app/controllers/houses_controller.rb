@@ -2,7 +2,7 @@ class HousesController < ApplicationController
   layout "profile", except: [:show]
   before_action :auth_user, except: [:show]
 
-  def myHouses
+  def my_houses
     @houses = House.where("owner_id = ?", current_user)
   end
 

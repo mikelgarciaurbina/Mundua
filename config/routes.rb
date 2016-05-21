@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   root 'home#index'
 
   devise_for :users
@@ -7,7 +8,7 @@ Rails.application.routes.draw do
   get '/group', to: 'groups#show'
   post '/join-group', to: 'groups#join_group'
   resources :houses, only: [ :new, :create, :show ]
-  get '/my-houses', to: 'houses#myHouses'
+  get '/my-houses', to: 'houses#my_houses'
   get '/group-house', to: 'houses#group_house'
   post '/join-house', to: 'houses#join_house'
   resources :users, only: [ :edit, :update ]

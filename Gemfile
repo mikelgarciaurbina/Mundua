@@ -22,8 +22,6 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'rspec-rails'
-
 gem 'devise'
 
 gem "paperclip", "~> 4.2"
@@ -37,8 +35,16 @@ gem 'rails_12factor', group: :production
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  
+  gem 'awesome_print', require: 'ap'
   gem 'pry-rails'
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails'
+  gem 'faker', '~> 1.6', '>= 1.6.3'
+  gem 'guard-rspec'
+  gem 'rubocop'
+  gem "binding_of_caller"
+  gem 'database_cleaner'
+  gem 'jasmine-rails'
 end
 
 group :development do

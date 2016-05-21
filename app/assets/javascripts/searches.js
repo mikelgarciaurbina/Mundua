@@ -128,65 +128,65 @@ document.addEventListener('DOMContentLoaded', function() {
 
       return iconFeature;
     }
-
-    function getHousesFromResponse(houses) {
-      return houses.reduce(function(result, house) {
-        result += houseToHTML(house);
-        return result;
-      },'');
-    }
-
-    function houseToHTML(house) {
-      var color = "";
-      if(house.users_count == 0) {
-        color = "light-green";
-      } else if(house.users_count >= house.rooms){
-        color = "red";
-      } else {
-        color = "orange";
-      }
-      return '' +
-        '<div class="col-6">' +
-        '<div class="item white shadow cf">' +
-            '<div class="row padding">' +
-              '<div class="col-11 col-persist gutter-h-10 padding-top-5' +
-                ' title-height">' +
-                '<h5 class="text-15 text700 pull-left">' +
-                  '<a href="/houses/' + house.id + '" class="black-gray">' +
-                    house.address + 
-                  '</a>' +
-                '</h5>' +
-              '</div>' +
-            '</div>' +
-            '<div class="row img-height">' +
-              '<a href="/houses/' + house.id + '" class="black-gray">' +
-                '<img class="pull-left width-100" src="' + house.image_url +
-                  '" />' +
-              '</a>' +
-            '</div>' +
-            '<div class="row padding">' +
-              '<div class="pull-left">' +
-                '<a href="/houses/' + house.id + '" class="btn icon round' +
-                  ' text-' + color + ' fill-silver">' +
-                  '<i class="fa fa-bed"></i>' +
-                '</a>' +
-                '<a class="btn white hover-disable text-' +
-                  color + ' text600">' +
-                  house.rooms +
-                '</a>' +
-              '</div>' +
-              '<div class="pull-right">' +
-                '<a href="/houses/' + house.id + '" class="btn icon round' +
-                  ' text-gray hover-text-red">' +
-                  '<i class="fa fa-users"></i>' +
-                '</a>' +
-                '<a class="btn white hover-disable text-gray text600">' +
-                  house.groups_count +
-                '</a>' +
-              '</div>' +
-            '</div>' +
-        '</div>' +
-      '</div>';
-    }
   }
 });
+
+function getHousesFromResponse(houses) {
+  return houses.reduce(function(result, house) {
+    result += houseToHTML(house);
+    return result;
+  },'');
+}
+
+function houseToHTML(house) {
+  var color = "";
+  if(house.users_count == 0) {
+    color = "light-green";
+  } else if(house.users_count >= house.rooms){
+    color = "red";
+  } else {
+    color = "orange";
+  }
+  return '' +
+    '<div class="col-6">' +
+    '<div class="item white shadow cf">' +
+        '<div class="row padding">' +
+          '<div class="col-11 col-persist gutter-h-10 padding-top-5' +
+            ' title-height">' +
+            '<h5 class="text-15 text700 pull-left">' +
+              '<a href="/houses/' + house.id + '" class="black-gray">' +
+                house.address + 
+              '</a>' +
+            '</h5>' +
+          '</div>' +
+        '</div>' +
+        '<div class="row img-height">' +
+          '<a href="/houses/' + house.id + '" class="black-gray">' +
+            '<img class="pull-left width-100" src="' + house.image_url +
+              '" />' +
+          '</a>' +
+        '</div>' +
+        '<div class="row padding">' +
+          '<div class="pull-left">' +
+            '<a href="/houses/' + house.id + '" class="btn icon round' +
+              ' text-' + color + ' fill-silver">' +
+              '<i class="fa fa-bed"></i>' +
+            '</a>' +
+            '<a class="btn white hover-disable text-' +
+              color + ' text600">' +
+              house.rooms +
+            '</a>' +
+          '</div>' +
+          '<div class="pull-right">' +
+            '<a href="/houses/' + house.id + '" class="btn icon round' +
+              ' text-gray hover-text-red">' +
+              '<i class="fa fa-users"></i>' +
+            '</a>' +
+            '<a class="btn white hover-disable text-gray text600">' +
+              house.groups_count +
+            '</a>' +
+          '</div>' +
+        '</div>' +
+    '</div>' +
+  '</div>';
+}
