@@ -1,9 +1,112 @@
-<div class="media">
-  <div class="media-left">
-    <%= link_to image_tag(@group.image.url, class: 'media-object'), @group.image.url, target: '_blank' %>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading"><%= @group.name %></h4>
-    <p><%= @group.description %></p>
+<div class="col-12">
+  <div class="position white shadow cf">
+    <% unless @group.friends_requests.blank? %>
+      <div class="row padding-20">
+        <div class="col-12">
+          <h4>Users who want to join your group</h4>
+        </div>
+      </div>
+      <div class="row padding-20">
+        <table class="hover">
+          <thead>
+            <tr class="text-13">
+              <th>Name</th>
+              <th>Technologies</th>
+              <th>Hobbies</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% getUsersFromString(@group.friends_requests).each do |user| %>
+              <tr>
+                <td><%= full_name(user) %></td>
+                <td>
+                  <% user.technologies.each do |technology| %>
+                    <a href="javascript:;" class="label orange-red hover-tooltip">
+                      <span class="tooltip top text-capitalize"><%= technology.name %></span>
+                      <%= technology.name %>
+                    </a>
+                  <% end %>
+                </td>
+                <td>
+                  <ul>
+                    <% user.hobbies.each do |hobby| %>
+                      <li><%= hobby.name %></li>
+                    <% end %>
+                  </ul>
+                </td>
+                <td class="text-right">
+                  <div class="action">
+                    <a href="/accept-group/<%= user.id %>" class="btn icon s green border rounded hover-tooltip">
+                      <span class="tooltip top">Accept</span>
+                      <i class="fa fa-check"></i>
+                    </a>
+                    <a href="/reject-group/<%= user.id %>" class="btn icon s red border rounded hover-tooltip">
+                      <span class="tooltip top">Reject</span>
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+    <div class="row padding-20">
+      <div class="col-9">
+        <h4><%= @group.name %></h4>
+      </div>
+      <div class="col-3 rating">
+        <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span class="a">☆</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4 tablet-col-persist shadow2">
+        <%= image_tag(@group.image.url, class: 'thumbnail') %>
+      </div>
+      <div class="col-8 tablet-col-persist padding-left-20 lh">
+        <p><span class="text-strong">Users in group:</span> <%= @group.users.length %></p>
+        <p><span class="text-strong">Description:</span> <%= @group.description %></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <h5 class="padding-20">Users</h5>
+      </div>
+    </div>
+    <div class="row padding-20">
+      <table class="hover">
+        <thead>
+          <tr class="text-13">
+            <th>Name</th>
+            <th>Technologies</th>
+            <th>Hobbies</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @group.users.each do |user| %>
+            <tr>
+              <td><%= full_name(user) %></td>
+              <td>
+                <% user.technologies.each do |technology| %>
+                  <a href="javascript:;" class="label orange-red hover-tooltip">
+                    <span class="tooltip top text-capitalize"><%= technology.name %></span>
+                    <%= technology.name %>
+                  </a>
+                <% end %>
+              </td>
+              <td>
+                <ul>
+                  <% user.hobbies.each do |hobby| %>
+                    <li><%= hobby.name %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>

@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
 
   def join_group
     group = Group.find(params[:group][:id])
-    if group.friends_requests.nil?
+    if group.friends_requests.blank?
       group.friends_requests = current_user.id
     else
       group.friends_requests += ", #{current_user.id}"
@@ -43,6 +43,27 @@ class GroupsController < ApplicationController
       flash[:error] = "The request has not sent!"
     end
     redirect_to house_path(group.house)
+  end
+
+  def accept_user
+    group = current_user.group
+    user_to_accept = User.find(params[:user])
+    if user_to_accept.nil?
+      flash[:error] = "User not found!"
+      redirect_to show_group_path
+    else
+      group.users.push(user_to_accept)
+      group.remove_user_from_friends_requests(params[:user])
+      flash[:success] = "User accept in group!"
+      redirect_to show_group_path
+    end
+  end
+
+  def reject_user
+    group = current_user.group
+    group.remove_user_from_friends_requests(params[:user])
+    flash[:success] = "User reject!"
+    redirect_to show_group_path
   end
 
   private

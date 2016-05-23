@@ -28,7 +28,7 @@
 </div>
 <%= form_for @technology do |form| %>
   <div id="technology">
-    <input class="technology-typeahead form-control" name="name" type="text" placeholder="Insert Technology">
+    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Technology">
   </div>
   <%= form.submit "Add technology", class: "btn blue margin-top-10" %>
 <% end %>
@@ -45,7 +45,7 @@
 </div>
 <%= form_for @hobby do |form| %>
   <div id="hobby">
-    <input class="hobby-typeahead form-control" name="name" type="text" placeholder="Insert Hobby">
+    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Hobby">
   </div>
   <%= form.submit "Add hobby", class: "btn blue margin-top-10" %>
 <% end %>

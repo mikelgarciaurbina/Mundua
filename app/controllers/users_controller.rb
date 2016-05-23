@@ -14,6 +14,8 @@ class UsersController < ApplicationController
       flash[:success] = "Data changed successfully!"
       redirect_to profile_path
     else
+      @technology = Technology.new
+      @hobby = Hobby.new
       render "profile", layout: "profile"
     end
   end

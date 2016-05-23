@@ -15,4 +15,11 @@ class Group < ActiveRecord::Base
 
   validates :name, presence: true
   validates :description, presence: true, length: { minimum: 10 }
+
+  def remove_user_from_friends_requests(user_id)
+    users_ids = self.friends_requests.split(', ')
+    users_ids -= [user_id]
+    self.friends_requests = users_ids.join(', ')
+    self.save
+  end
 end

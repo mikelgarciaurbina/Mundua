@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get '/group', to: 'groups#show', as: 'show_group'
   get '/group-edit', to: 'groups#edit'
   post '/join-group', to: 'groups#join_group'
+  get '/accept-group/:user', to: 'groups#accept_user'
+  get '/reject-group/:user', to: 'groups#reject_user'
   resources :houses, only: [ :new, :create, :show ]
   get '/my-houses', to: 'houses#my_houses'
   get '/group-house', to: 'houses#group_house'

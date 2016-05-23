@@ -79,4 +79,11 @@ RSpec.describe Group, type: :model do
     house.groups.push(group)
     expect(group.house).to eq(house)
   end
+
+  it "remove_user_from_friends_requests(user_id)" do
+    group = FactoryGirl.build(:group)
+    group.friends_requests = "1, 2, 3"
+    group.remove_user_from_friends_requests("2")
+    expect(group.friends_requests).to eq("1, 3")
+  end
 end

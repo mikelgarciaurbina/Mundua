@@ -14,7 +14,7 @@ function getTechnologies(technologies){
     local: arrayTechnologies
   });
   
-  document.getElementsByClassName("technology-typeahead")[0].typeahead({
+  $('#technology .typeahead').typeahead({
     hint: true,
     highlight: true,
     minLength: 1

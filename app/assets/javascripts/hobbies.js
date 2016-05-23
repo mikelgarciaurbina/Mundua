@@ -14,7 +14,7 @@ function getHobbies(hobbies){
     local: arrayHobbies
   });
 
-  document.getElementsByClassName("hobby-typeahead").typeahead({
+  $('#hobby .typeahead').typeahead({
     hint: true,
     highlight: true,
     minLength: 1

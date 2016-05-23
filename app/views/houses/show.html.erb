@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div class="col-12 tablet-col-persist shadow2">
-          <img class="thumbnail" src="<%= @house.image.url %>"/>
+          <%= image_tag(@house.image.url, class: 'thumbnail') %>
         </div>
       </div>
       <div class="row">
@@ -52,7 +52,7 @@
           </div>
           <div class="row">
             <div class="col-4 tablet-col-persist shadow2">
-              <img class="thumbnail" src="<%= group.image.url %>"/>
+              <%= image_tag(group.image.url, class: 'thumbnail') %>
             </div>
             <div class="col-8 tablet-col-persist padding-left-20 lh">
               <p><span class="text-strong">Users in group:</span> <%= group.users.length %></p>
