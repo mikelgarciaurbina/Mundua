@@ -1,12 +1,12 @@
 <% if object.errors.any? %>
-  <div class="panel panel-warning errors">
+  <div class="panel panel-warning errors padding-top">
     <div class="panel-heading">
       <h5><i class="glyphicon glyphicon-exclamation-sign"></i> Found errors while saving</h5>
     </div>
 
-    <ul class="panel-body">
+    <ul class="panel-body padding">
       <% object.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+        <li class="content-li content-li-red"><%= msg %></li>
       <% end %>
     </ul>
   </div>

@@ -2,7 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.sign-out:before{
-  font-family: 'Font-awesome';
-  content: '\f08b'
+.content-li:before {
+  content: ' - ';
+}
+
+.content-li-red {
+  color: red;
 }

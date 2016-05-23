@@ -1,7 +1,8 @@
-.alert {
+.flash {
   position: absolute;
   top: 35px;
   left: 50%;
   width: 50%;
   margin: 0 0% 0 -25%;
+  z-index: 999999999;
 }

@@ -12,6 +12,7 @@
  *
  *= require modulr/modulr.min.css
  *= require modulr/tooltip.min.css
+ *= require modulr/animation.min.css
  *= require ol.css
  *= require_tree .
  *= require_self

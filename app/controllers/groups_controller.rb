@@ -6,6 +6,13 @@ class GroupsController < ApplicationController
     @group = Group.new
   end
 
+  def edit
+    @group = current_user.group
+    if current_user.id != current_user.group.owner_id
+      redirect_to profile_path
+    end
+  end
+
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id

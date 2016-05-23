@@ -13,6 +13,7 @@
 //= require ol.js
 //= require jquery
 //= require jquery_ujs
+//= require typeahead.bundle.min.js
 //= require_tree .
 
 function setNavigation(){
@@ -27,6 +28,9 @@ function setNavigation(){
 
 document.addEventListener('DOMContentLoaded', function() {
   setNavigation();
+  setTimeout(function() {
+    document.getElementsByClassName("js-flash")[0].classList.add("fade-out-up");
+  }, 3500);
 });
 
 var Mundua = function() {
@@ -39,6 +43,10 @@ var Mundua = function() {
     };
 
     _getDevise = function (query) {
+        return _proxy('GET', query, 'text' );
+    };
+
+    _getUserData = function (query) {
         return _proxy('GET', query, 'text' );
     };
 
@@ -75,6 +83,7 @@ var Mundua = function() {
     return {
         searchNomadList : _searchNomadList,
         getDevise       : _getDevise,
-        getHousesInApi  : _getHousesInApi
+        getHousesInApi  : _getHousesInApi,
+        getUserData     : _getUserData
     }
 }();
