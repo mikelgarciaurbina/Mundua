@@ -44,7 +44,18 @@
         <% @house.groups.each do |group| %>
           <div class="row padding-20">
             <div class="col-9">
-              <h5><%= group.name %></h5>
+              <h5><%= group.name %> 
+              <% if user_signed_in? %>
+                <% compatibility = group.user_compatibility(current_user) %>
+                <% if compatibility > 70 %>
+                  <span class="text-green">(Compatibility <%= compatibility %>%)</span>
+                <% elsif compatibility > 40 %>
+                  <span class="text-orange">(Compatibility <%= compatibility %>%)</span>
+                <% else %>
+                  <span class="text-red">(Compatibility <%= compatibility %>%)</span>
+                <% end %>
+              <% end %>
+              </h5>
             </div>
             <div class="col-3 rating">
               <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span class="a">☆</span>

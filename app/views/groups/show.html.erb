@@ -1,6 +1,6 @@
 <div class="col-12">
   <div class="position white shadow cf">
-    <% unless @group.friends_requests.blank? %>
+    <% if !@group.friends_requests.blank? && current_user.id == @group.owner_id %>
       <div class="row padding-20">
         <div class="col-12">
           <h4>Users who want to join your group</h4>
@@ -37,11 +37,11 @@
                 </td>
                 <td class="text-right">
                   <div class="action">
-                    <a href="/accept-group/<%= user.id %>" class="btn icon s green border rounded hover-tooltip">
+                    <a href="/accept-user/<%= user.id %>" class="btn icon s green border rounded hover-tooltip">
                       <span class="tooltip top">Accept</span>
                       <i class="fa fa-check"></i>
                     </a>
-                    <a href="/reject-group/<%= user.id %>" class="btn icon s red border rounded hover-tooltip">
+                    <a href="/reject-user/<%= user.id %>" class="btn icon s red border rounded hover-tooltip">
                       <span class="tooltip top">Reject</span>
                       <i class="fa fa-times"></i>
                     </a>
@@ -82,6 +82,9 @@
             <th>Name</th>
             <th>Technologies</th>
             <th>Hobbies</th>
+            <% if current_user.id == @group.owner_id %>
+              <th></th>
+            <% end %>
           </tr>
         </thead>
         <tbody>
@@ -103,6 +106,16 @@
                   <% end %>
                 </ul>
               </td>
+              <% if current_user.id == @group.owner_id %>
+                <td class="text-right">
+                  <div class="action">
+                    <a href="/delete-user/<%= user.id %>" data-method="delete" class="btn icon s red border rounded hover-tooltip">
+                      <span class="tooltip top">Delete user</span>
+                      <i class="fa fa-times"></i>
+                    </a>
+                  </div>
+                </td>
+              <% end %>
             </tr>
           <% end %>
         </tbody>

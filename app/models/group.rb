@@ -22,4 +22,65 @@ class Group < ActiveRecord::Base
     self.friends_requests = users_ids.join(', ')
     self.save
   end
+
+  def self.removeUserToFriendsRequestsFromAllGroups(user_id)
+    Group.all.each do |group|
+      group.remove_user_from_friends_requests(user_id)
+    end
+  end
+
+  def total_match
+    users.reduce(0) do |result, user|
+      result += user.technologies.count + user.hobbies.count
+    end
+  end
+
+  def user_compatibility(user_compability)
+    user_total_compatibility(user_compability) * 100 / total_match
+  end
+
+  def user_total_compatibility(user_compability)
+    compatibility = 0
+    compatibility += user_technologies_compability(user_compability)
+    compatibility += user_hobbies_compability(user_compability)
+    compatibility
+  end
+
+  def user_technologies_compability(user_compability)
+    technologies = get_all_technologies
+    technologies.reduce(0) do |result, technology|
+      user_compability.technologies.each do |technology_compatibility|
+        if technology.name == technology_compatibility.name
+          result += 1
+        end
+      end
+      result
+    end
+  end
+
+  def get_all_technologies
+    technologies = users.map do |user|
+      user.technologies
+    end
+    technologies.flatten
+  end
+
+  def user_hobbies_compability(user_compability)
+    hobbies = get_all_hobbies
+    hobbies.reduce(0) do |result, hobby|
+      user_compability.hobbies.each do |hobby_compatibility|
+        if hobby.name == hobby_compatibility.name
+          result += 1
+        end
+      end
+      result
+    end
+  end
+
+  def get_all_hobbies
+    hobbies = users.map do |user|
+      user.hobbies
+    end
+    hobbies.flatten
+  end
 end

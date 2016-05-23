@@ -20,9 +20,19 @@ class GroupsController < ApplicationController
       current_user.group = @group
       current_user.save
       flash[:success] = "The group was created!"
-      redirect_to group_path(@group)
+      redirect_to show_group_path
     else
       render 'new'
+    end
+  end
+
+  def update
+    @group = current_user.group
+    if @group.update(group_params)
+      flash[:success] = "The group was update successfully!"
+      redirect_to show_group_path
+    else
+      render 'edit'
     end
   end
 
@@ -47,13 +57,13 @@ class GroupsController < ApplicationController
 
   def accept_user
     group = current_user.group
-    user_to_accept = User.find(params[:user])
+    user_to_accept = User.find_by(id: params[:user])
     if user_to_accept.nil?
       flash[:error] = "User not found!"
       redirect_to show_group_path
     else
       group.users.push(user_to_accept)
-      group.remove_user_from_friends_requests(params[:user])
+      Group.removeUserToFriendsRequestsFromAllGroups(params[:user])
       flash[:success] = "User accept in group!"
       redirect_to show_group_path
     end
@@ -63,6 +73,22 @@ class GroupsController < ApplicationController
     group = current_user.group
     group.remove_user_from_friends_requests(params[:user])
     flash[:success] = "User reject!"
+    redirect_to show_group_path
+  end
+
+  def delete_user
+    if current_user.id == current_user.group.owner_id
+      group = current_user.group
+      user = User.find_by(id: params[:user])
+      if user.id == current_user.group.owner_id
+        flash[:error] = "This user is admin!"
+      else
+        group.users -= [user]
+        flash[:success] = "User deleted!"
+      end
+    else
+      flash[:error] = "You don't have a permission!"
+    end
     redirect_to show_group_path
   end
 

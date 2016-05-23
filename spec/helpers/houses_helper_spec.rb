@@ -101,4 +101,12 @@ RSpec.describe HousesHelper, type: :helper do
     expect(user_not_are_in_friends_request?(group)).to eq(true)
   end
 
+  it "getGroupsFromString(string)" do
+    house = FactoryGirl.build(:house)
+    group = FactoryGirl.build(:group)
+    group.save
+    house.groups_requests = "1"
+    expect(getGroupsFromString(house.groups_requests)).to eq([group])
+  end
+
 end

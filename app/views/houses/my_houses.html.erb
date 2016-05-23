@@ -1,14 +1,202 @@
 <% @houses.each do |house| %>
-<div class="media">
-  <div class="media-left">
-    <%= link_to image_tag(house.image.url, class: 'media-object'), house.image.url, target: '_blank' %>
+  <div class="row padding-bottom-20">  
+    <div class="col-12">
+      <div class="position white shadow cf">
+        <div class="row padding-20">
+          <div class="col-9">
+            <h4><%= house.address %></h4>
+          </div>
+          <div class="col-3 rating">
+            <span>☆</span><span>☆</span><span class="a">☆</span><span  class="a">☆</span><span  class="a">☆</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 tablet-col-persist shadow2">
+            <%= image_tag(house.image.url, class: 'thumbnail') %>
+          </div>
+        </div>
+        <% if current_user.id == house.owner_id %>
+          <div class="row padding">
+            <div class="col-12">
+              <a href="/houses/<%= house.id %>" data-method="delete" class="btn red">Delete my house</a>
+            </div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-12 padding-20">
+            <p><span class="text-strong">Rooms:</span> <%= house.rooms %></p>
+            <p><span class="text-strong">Description:</span> <%= house.description %></p>
+          </div>
+        </div>
+        <% unless house.groups_requests.blank? %>
+          <hr>
+          <div class="row padding-20">
+            <div class="col-12">
+              <h4>Groups that want to join in this house:</h4>
+            </div>
+          </div>
+          <hr>
+          <% getGroupsFromString(house.groups_requests).each do |group| %>
+            <div class="row padding-20">
+              <div class="col-9">
+                <h5><%= group.name %></h5>
+              </div>
+              <div class="col-3 rating">
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span class="a">☆</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 tablet-col-persist shadow2">
+                <%= image_tag(group.image.url, class: 'thumbnail') %>
+              </div>
+              <div class="col-8 tablet-col-persist padding-left-20 lh">
+                <p><span class="text-strong">Users in group:</span> <%= group.users.length %></p>
+                <p><span class="text-strong">Description:</span> <%= group.description %></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 padding-left-20 padding-top-20">
+                <span class="text-green">Accept</span>
+                <a href="/houses/<%= house.id %>/accept-group/<%= group.id %>" class="btn icon s green border rounded hover-tooltip">
+                  <span class="tooltip top">Accept</span>
+                  <i class="fa fa-check"></i>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 padding-left-20 padding-top-10">
+                <span class="text-red">Reject</span>
+                <a href="/houses/<%= house.id %>/reject-group/<%= group.id %>" class="btn icon s red border rounded hover-tooltip">
+                  <span class="tooltip top">Reject</span>
+                  <i class="fa fa-times"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <h5 class="padding-20">Users</h5>
+              </div>
+            </div>
+            <div class="row padding-20">
+              <table class="hover">
+                <thead>
+                  <tr class="text-13">
+                    <th>Name</th>
+                    <th>Technologies</th>
+                    <th>Hobbies</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% group.users.each do |user| %>
+                    <tr>
+                      <td><%= full_name(user) %></td>
+                      <td>
+                        <% user.technologies.each do |technology| %>
+                          <a href="javascript:;" class="label orange-red hover-tooltip">
+                            <span class="tooltip top text-capitalize"><%= technology.name %></span>
+                            <%= technology.name %>
+                          </a>
+                        <% end %>
+                      </td>
+                      <td>
+                        <ul>
+                          <% user.hobbies.each do |hobby| %>
+                            <li><%= hobby.name %></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <% unless getGroupsFromString(house.groups_requests)[getGroupsFromString(house.groups_requests).length - 1] == group %>
+              <hr>
+            <% end %>
+          <% end %>
+        <% end %>
+        <% if house.groups.length > 0 %>
+          <hr>
+          <div class="row padding-20">
+            <div class="col-12">
+              <h4>Groups in this house:</h4>
+            </div>
+          </div>
+          <hr>
+          <% house.groups.each do |group| %>
+            <div class="row padding-20">
+              <div class="col-9">
+                <h5><%= group.name %></h5>
+              </div>
+              <div class="col-3 rating">
+                <span>☆</span><span>☆</span><span>☆</span><span>☆</span><span class="a">☆</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-4 tablet-col-persist shadow2">
+                <%= image_tag(group.image.url, class: 'thumbnail') %>
+              </div>
+              <div class="col-8 tablet-col-persist padding-left-20 lh">
+                <p><span class="text-strong">Users in group:</span> <%= group.users.length %></p>
+                <p><span class="text-strong">Description:</span> <%= group.description %></p>
+              </div>
+            </div>
+            <% if current_user.id == house.owner_id %>
+              <div class="row padding">
+                <div class="col-12">
+                  <a href="/houses/<%= house.id %>/delete-group/<%= group.id %>" data-method="delete" class="btn red">Delete group from my house</a>
+                </div>
+              </div>
+            <% end %>
+            <div class="row">
+              <div class="col-12">
+                <h5 class="padding-20">Users</h5>
+              </div>
+            </div>
+            <div class="row padding-20">
+              <table class="hover">
+                <thead>
+                  <tr class="text-13">
+                    <th>Name</th>
+                    <th>Technologies</th>
+                    <th>Hobbies</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% group.users.each do |user| %>
+                    <tr>
+                      <td><%= full_name(user) %></td>
+                      <td>
+                        <% user.technologies.each do |technology| %>
+                          <a href="javascript:;" class="label orange-red hover-tooltip">
+                            <span class="tooltip top text-capitalize"><%= technology.name %></span>
+                            <%= technology.name %>
+                          </a>
+                        <% end %>
+                      </td>
+                      <td>
+                        <ul>
+                          <% user.hobbies.each do |hobby| %>
+                            <li><%= hobby.name %></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <% unless house.groups[house.groups.length - 1] == group %>
+              <hr>
+            <% end %>
+          <% end %>
+        <% end %>
+
+
+      </div>
+    </div>
   </div>
-  <div class="media-body">
-    <h4 class="media-heading"><%= house.address %></h4>
-    <p><%= house.latitude %></p>
-    <p><%= house.longitude %></p>
-    <p><%= house.rooms %></p>
-    <p><%= house.description %></p>
-  </div>
-</div>
 <% end %>
+

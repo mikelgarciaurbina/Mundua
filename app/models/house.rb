@@ -35,4 +35,17 @@ class House < ActiveRecord::Base
   def image_url
     self.image.url
   end
+
+  def remove_group_from_groups_requests(group_id)
+    groups_ids = self.groups_requests.split(', ')
+    groups_ids -= [group_id]
+    self.groups_requests = groups_ids.join(', ')
+    self.save
+  end
+
+  def self.removeGroupToGroupsRequestsFromAllHouses(group_id)
+    House.all.each do |house|
+      house.remove_group_from_groups_requests(group_id)
+    end
+  end
 end

@@ -41,4 +41,10 @@ module HousesHelper
       result.nil?
     end
   end
+
+  def getGroupsFromString(string)
+    string.split(", ").map do |id|
+      Group.find(id)
+    end
+  end
 end

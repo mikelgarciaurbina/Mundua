@@ -1,12 +1,23 @@
-<div class="media">
-  <div class="media-left">
-    <%= link_to image_tag(@house.image.url, class: 'media-object'), @house.image.url, target: '_blank' %>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading"><%= @house.address %></h4>
-    <p><%= @house.latitude %></p>
-    <p><%= @house.longitude %></p>
-    <p><%= @house.rooms %></p>
-    <p><%= @house.description %></p>
+<div class="col-12">
+  <div class="position white shadow cf">
+    <div class="row padding-20">
+      <div class="col-9">
+        <h4><%= @house.address %></h4>
+      </div>
+      <div class="col-3 rating">
+        <span>☆</span><span>☆</span><span class="a">☆</span><span  class="a">☆</span><span  class="a">☆</span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 tablet-col-persist shadow2">
+        <%= image_tag(@house.image.url, class: 'thumbnail') %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 padding-20">
+        <p><span class="text-strong">Rooms:</span> <%= @house.rooms %></p>
+        <p><span class="text-strong">Description:</span> <%= @house.description %></p>
+      </div>
+    </div>
   </div>
 </div>

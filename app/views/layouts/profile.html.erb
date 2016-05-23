@@ -36,22 +36,7 @@
     </div>
     <!-- Navbar End -->
     <div class="row">
-      <div class="col-3 padding-top-20 col-persist">
-        <ul class="filter filter-right blue js-profile-nav">
-          <li><a href="/profile">Profile</a></li>
-          <% if current_user.group.nil? %>
-            <li><%= link_to 'New Group', new_group_path %></li>
-          <% else %>
-            <li><%= link_to 'Show Group', show_group_path %></li>
-          <% end %>
-          <li><%= link_to 'New House', new_house_path %></li>
-          <% if defined?(current_user.group.house) && !current_user.group.house.nil? %>
-            <li><%= link_to 'Show Group House', group_house_path %></li>
-          <% end %>
-          <li><%= link_to 'Show My Houses', my_houses_path %></li>
-          <li><%= link_to 'Change password', change_password_path %></li>
-        </ul>
-      </div>
+      <%= render partial: "layouts/nav_profile" %>
       <div class="col-7 offset-left-1 padding-20">
         <%= yield %>
       </div>

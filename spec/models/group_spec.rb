@@ -86,4 +86,112 @@ RSpec.describe Group, type: :model do
     group.remove_user_from_friends_requests("2")
     expect(group.friends_requests).to eq("1, 3")
   end
+
+  it "total_match" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    technology = FactoryGirl.build(:technology)
+    hobby = FactoryGirl.build(:hobby)
+    technology.save
+    hobby.save
+    user.technologies.push(technology)
+    user.hobbies.push(hobby)
+    user.save
+    group.users.push(user)
+    expect(group.total_match).to eq(2)
+  end
+
+  it "user_total_compatibility" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
+    technology = FactoryGirl.build(:technology)
+    hobby = FactoryGirl.build(:hobby)
+    technology.save
+    hobby.save
+    user.technologies.push(technology)
+    user.hobbies.push(hobby)
+    user.save
+    user2.technologies.push(technology)
+    user2.hobbies.push(hobby)
+    user2.save
+    group.users.push(user)
+    expect(group.user_total_compatibility(user2)).to eq(2)
+  end
+
+  it "user_compatibility" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
+    technology = FactoryGirl.build(:technology)
+    hobby = FactoryGirl.build(:hobby)
+    technology.save
+    hobby.save
+    user.technologies.push(technology)
+    user.hobbies.push(hobby)
+    user.save
+    user2.technologies.push(technology)
+    user2.hobbies.push(hobby)
+    user2.save
+    group.users.push(user)
+    expect(group.user_compatibility(user2)).to eq(100)
+  end
+
+  it "user_technologies_compability" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
+    technology = FactoryGirl.build(:technology)
+    hobby = FactoryGirl.build(:hobby)
+    technology.save
+    hobby.save
+    user.technologies.push(technology)
+    user.hobbies.push(hobby)
+    user.save
+    user2.technologies.push(technology)
+    user2.hobbies.push(hobby)
+    user2.save
+    group.users.push(user)
+    expect(group.user_technologies_compability(user2)).to eq(1)
+  end
+
+  it "user_hobbies_compability" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
+    technology = FactoryGirl.build(:technology)
+    hobby = FactoryGirl.build(:hobby)
+    technology.save
+    hobby.save
+    user.technologies.push(technology)
+    user.hobbies.push(hobby)
+    user.save
+    user2.technologies.push(technology)
+    user2.hobbies.push(hobby)
+    user2.save
+    group.users.push(user)
+    expect(group.user_hobbies_compability(user2)).to eq(1)
+  end
+
+  it "get_all_technologies" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    technology = FactoryGirl.build(:technology)
+    technology.save
+    user.technologies.push(technology)
+    user.save
+    group.users.push(user)
+    expect(group.get_all_technologies).to eq([technology])
+  end
+
+  it "user_hobbies_compability" do
+    group = FactoryGirl.build(:group)
+    user = FactoryGirl.build(:user)
+    hobby = FactoryGirl.build(:hobby)
+    hobby.save
+    user.hobbies.push(hobby)
+    user.save
+    group.users.push(user)
+    expect(group.get_all_hobbies).to eq([hobby])
+  end
 end

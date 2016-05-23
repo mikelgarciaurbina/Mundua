@@ -32,7 +32,7 @@ class HousesController < ApplicationController
 
   def join_house
     house = House.find(params[:house][:id])
-    if house.groups_requests.nil?
+    if house.groups_requests.blank?
       house.groups_requests = current_user.id
     else
       house.groups_requests += ", #{current_user.id}"
@@ -40,6 +40,50 @@ class HousesController < ApplicationController
     house.save
     flash[:success] = "The request has sent!"
     redirect_to house_path(house)
+  end
+
+  def accept_group
+    house = House.find_by(id: params[:id])
+    group_to_accept = Group.find_by(id: params[:group])
+    if group_to_accept.nil?
+      flash[:error] = "Group not found!"
+      redirect_to my_houses_path
+    else
+      house.groups.push(group_to_accept)
+      House.removeGroupToGroupsRequestsFromAllHouses(params[:group])
+      flash[:success] = "Group accept in house!"
+      redirect_to my_houses_path
+    end
+  end
+
+  def reject_group
+    house = House.find_by(id: params[:id])
+    house.remove_group_from_groups_requests(params[:group])
+    flash[:success] = "Group reject!"
+    redirect_to my_houses_path
+  end
+
+  def delete_group
+    house = House.find_by(id: params[:id])
+    if current_user.id == house.owner_id
+      group = Group.find_by(id: params[:group])
+      house.groups -= [group]
+      flash[:success] = "Group deleted!"
+    else
+      flash[:error] = "You don't have a permission!"
+    end
+    redirect_to my_houses_path
+  end
+
+  def destroy
+    house = House.find_by(id: params[:id])
+    if current_user.id == house.owner_id
+      house.delete
+      flash[:success] = "House deleted!"
+    else
+      flash[:error] = "You don't have a permission!"
+    end
+    redirect_to my_houses_path
   end
 
   private
