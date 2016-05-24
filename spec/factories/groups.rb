@@ -1,11 +1,9 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
-  factory :group do
-    id 1
+  factory :group, :class => 'Group' do
     name 'Aaron'
     description 'Sumner is the best'
-    image_file_name "ironhack.jpg"
-    image_content_type "image/jpeg"
-    image_file_size 86856
-    image_updated_at Time.now
+    image { fixture_file_upload Rails.root.join('spec/fixtures/test_img.png'), 'image/png' }
   end
 end

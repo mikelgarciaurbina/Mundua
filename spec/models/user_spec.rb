@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   it "is valid with a name, email and password" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     expect(user).to be_valid
   end
 
   it "is correct a name" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     expect(user.name).to eq("Mikel")
   end
 
@@ -21,13 +21,13 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid with a name" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     user.valid?
     expect(user.errors[:name]).not_to include("can't be blank")
   end
 
   it "is correct a email" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     expect(user.email).to eq("mikel@ironhack.com")
   end
 
@@ -41,7 +41,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid with a name" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     user.valid?
     expect(user.errors[:email]).not_to include("can't be blank")
   end
@@ -67,7 +67,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid relation user - group" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     group = Group.new(
       name: 'Aaron',
       description: 'Sumner is the best',
@@ -80,7 +80,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid relation user - technology" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     technology = Technology.new(
       name: 'HTML5')
     user.technologies.push(technology)
@@ -88,7 +88,7 @@ RSpec.describe User, type: :model do
   end
 
   it "is valid relation user - hobby" do
-    user = FactoryGirl.build(:user)
+    user = create(:user)
     hobby = Hobby.new(
       name: 'Baketball')
     user.hobbies.push(hobby)

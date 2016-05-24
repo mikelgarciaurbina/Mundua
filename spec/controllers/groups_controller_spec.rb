@@ -6,28 +6,15 @@ RSpec.describe GroupsController, type: :controller do
       true
     end
   end
-  let(:current_user) { FactoryGirl.build(:user) }
 
-  it "renders the profile template" do
+  it "new" do
     get :new
     expect(response).to render_template("profile")
   end
 
-  # it 'creates the group' do
-  #   login_as current_user
-  #   post :create, group: FactoryGirl.attributes_for(:group)
-  #   expect(Group.count).to eq(1)
-  # end
-
-  # it 'redirects to the "show" action for the new group' do
-  #   login_as current_user
-  #   post :create, group: FactoryGirl.attributes_for(:group)
-  #   expect(response).to redirect_to Group.first
-  # end
-
-  # it "renders the profile template" do
-  #   login_as current_user
-  #   get :show
-  #   expect(response).to render_template("profile")
-  # end
+  it 'create' do
+    login_with create( :user )
+    post :create, group: attributes_for(:group, :owner_id => 1)
+    expect(Group.all.count).to eq(1)
+  end
 end

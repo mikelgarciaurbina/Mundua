@@ -17,7 +17,7 @@
             </tr>
           </thead>
           <tbody>
-            <% getUsersFromString(@group.friends_requests).each do |user| %>
+            <% get_users_from_string(@group.friends_requests).each do |user| %>
               <tr>
                 <td><%= full_name(user) %></td>
                 <td>

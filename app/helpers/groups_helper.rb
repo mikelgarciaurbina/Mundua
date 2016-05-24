@@ -1,5 +1,5 @@
 module GroupsHelper
-  def getUsersFromString(string)
+  def get_users_from_string(string)
     string.split(", ").map do |id|
       User.find(id)
     end

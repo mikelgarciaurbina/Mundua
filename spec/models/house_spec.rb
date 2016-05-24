@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe House, type: :model do
   it "is valid with a latitude, longitude, address, rooms, description and image" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house).to be_valid
   end
 
   it "is correct a latitude" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house.latitude).to eq(BigDecimal.new("40.438785"))
   end
 
@@ -26,13 +26,13 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid with a latitude" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     house.valid?
     expect(house.errors[:latitude]).not_to include("can't be blank")
   end
 
   it "is correct a longitude" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house.longitude).to eq(BigDecimal.new("-3.698664"))
   end
 
@@ -51,13 +51,13 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid with a longitude" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     house.valid?
     expect(house.errors[:longitude]).not_to include("can't be blank")
   end
 
   it "is correct a address" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house.address).to eq("Calle Vargas, 3")
   end
 
@@ -76,13 +76,13 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid with a address" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     house.valid?
     expect(house.errors[:address]).not_to include("can't be blank")
   end
 
   it "is correct a rooms" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house.rooms).to eq(4)
   end
 
@@ -101,13 +101,13 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid with a rooms" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     house.valid?
     expect(house.errors[:rooms]).not_to include("can't be blank")
   end
 
   it "is correct a description" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     expect(house.description).to eq("Sumner is the best")
   end
 
@@ -126,7 +126,7 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid with a description" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     house.valid?
     expect(house.errors[:description]).not_to include("can't be blank")
   end
@@ -138,7 +138,7 @@ RSpec.describe House, type: :model do
   end
 
   it "is valid relation House - group" do
-    house = FactoryGirl.build(:house)
+    house = create(:house)
     group = Group.new(
       name: 'Aaron',
       description: 'Sumner is the best',

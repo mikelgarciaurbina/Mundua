@@ -48,6 +48,12 @@ group :development, :test do
   gem "binding_of_caller"
   gem 'database_cleaner'
   gem 'jasmine-rails'
+  gem 'capybara'
+  gem 'spring-commands-rspec'
+  gem 'vcr'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do

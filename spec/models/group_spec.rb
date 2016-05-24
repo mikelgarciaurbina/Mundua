@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Group, type: :model do
   it "is valid with a name, description and image" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     expect(group).to be_valid
   end
 
   it "is correct a name" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     expect(group.name).to eq("Aaron")
   end
 
@@ -23,13 +23,13 @@ RSpec.describe Group, type: :model do
   end
 
   it "is valid with a name" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     group.valid?
     expect(group.errors[:name]).not_to include("can't be blank")
   end
 
   it "is correct a description" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     expect(group.description).to eq("Sumner is the best")
   end
 
@@ -45,7 +45,7 @@ RSpec.describe Group, type: :model do
   end
 
   it "is valid with a description" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     group.valid?
     expect(group.errors[:description]).not_to include("can't be blank")
   end
@@ -57,7 +57,7 @@ RSpec.describe Group, type: :model do
   end
 
   it "is valid relation group - user" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     user = User.new(
       name: "Mikel",
       email: "mikel@ironhack.com",
@@ -69,7 +69,7 @@ RSpec.describe Group, type: :model do
   end
 
   it "is valid relation group - house" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     house = House.new(
       latitude: "40.438785",
       longitude: "-3.698664",
@@ -81,17 +81,17 @@ RSpec.describe Group, type: :model do
   end
 
   it "remove_user_from_friends_requests(user_id)" do
-    group = FactoryGirl.build(:group)
+    group = create(:group)
     group.friends_requests = "1, 2, 3"
     group.remove_user_from_friends_requests("2")
     expect(group.friends_requests).to eq("1, 3")
   end
 
   it "total_match" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    technology = FactoryGirl.build(:technology)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    technology = create(:technology)
+    hobby = create(:hobby)
     technology.save
     hobby.save
     user.technologies.push(technology)
@@ -102,11 +102,11 @@ RSpec.describe Group, type: :model do
   end
 
   it "user_total_compatibility" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
-    technology = FactoryGirl.build(:technology)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    user2 = create(:user, email: "alex@ironhack.com", id: 2)
+    technology = create(:technology)
+    hobby = create(:hobby)
     technology.save
     hobby.save
     user.technologies.push(technology)
@@ -120,11 +120,11 @@ RSpec.describe Group, type: :model do
   end
 
   it "user_compatibility" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
-    technology = FactoryGirl.build(:technology)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    user2 = create(:user, email: "alex@ironhack.com", id: 2)
+    technology = create(:technology)
+    hobby = create(:hobby)
     technology.save
     hobby.save
     user.technologies.push(technology)
@@ -138,11 +138,11 @@ RSpec.describe Group, type: :model do
   end
 
   it "user_technologies_compability" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
-    technology = FactoryGirl.build(:technology)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    user2 = create(:user, email: "alex@ironhack.com", id: 2)
+    technology = create(:technology)
+    hobby = create(:hobby)
     technology.save
     hobby.save
     user.technologies.push(technology)
@@ -156,11 +156,11 @@ RSpec.describe Group, type: :model do
   end
 
   it "user_hobbies_compability" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    user2 = FactoryGirl.build(:user, email: "alex@ironhack.com", id: 2)
-    technology = FactoryGirl.build(:technology)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    user2 = create(:user, email: "alex@ironhack.com", id: 2)
+    technology = create(:technology)
+    hobby = create(:hobby)
     technology.save
     hobby.save
     user.technologies.push(technology)
@@ -174,9 +174,9 @@ RSpec.describe Group, type: :model do
   end
 
   it "get_all_technologies" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    technology = FactoryGirl.build(:technology)
+    group = create(:group)
+    user = create(:user)
+    technology = create(:technology)
     technology.save
     user.technologies.push(technology)
     user.save
@@ -185,9 +185,9 @@ RSpec.describe Group, type: :model do
   end
 
   it "user_hobbies_compability" do
-    group = FactoryGirl.build(:group)
-    user = FactoryGirl.build(:user)
-    hobby = FactoryGirl.build(:hobby)
+    group = create(:group)
+    user = create(:user)
+    hobby = create(:hobby)
     hobby.save
     user.hobbies.push(hobby)
     user.save

@@ -97,7 +97,7 @@ describe('home.js', function() {
     elem.innerHTML = "my Text";
     document.body.appendChild(elem,document.body.childNodes[0]);
     var login = document.getElementsByClassName("js-login4")[0];
-    result = "<html><head></head><body>hola</body></html>";
+    result = '<html><head></head><body><aside class="js-content-body">hola</aside></body></html>';
     fillModal(login, result);
     expect(login.innerHTML).toBe("hola");
   });
@@ -108,7 +108,7 @@ describe('home.js', function() {
   });
 
   it("getBodyToHtml", function() {
-    result = "<html><head></head><body>hola</body></html>";
+    result = '<html><head></head><body><aside class="js-content-body">hola</aside></body></html>';
     expect(getBodyToHtml(result)).toBe("hola");
   });
 });

@@ -19,6 +19,20 @@
 
 require_relative 'support/controller_helpers'
 require 'devise'
+# require 'capybara/rspec'
+# require 'capybara/rails'
+
+# Capybara.configure do |c|
+#   c.default_driver = :chrome
+#   c.javascript_driver = :chrome
+#   c.app_host = 'http://localhost:3000'
+# end
+
+# Capybara.register_driver :chrome do |app|
+#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
+# end
+
+# Capybara.javascript_driver = :chrome
 
 RSpec.configure do |config|
 
@@ -33,7 +47,10 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
+    Warden.test_reset!
   end
+  config.include ControllerHelpers, type: :controller
+  Warden.test_mode!
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

@@ -1,9 +1,9 @@
 <%= form_for @group do |form| %>
   <%= render 'partials/errors', object: @group %>
 
-  <div class="form-group">
+  <div class="form-group" id="new-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control', required: true %>
+    <%= form.text_field :name, class: 'form-control', required: true, id: "group-name" %>
   </div>
 
   <div class="form-group">

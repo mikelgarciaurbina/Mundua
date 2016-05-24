@@ -23,7 +23,7 @@ class Group < ActiveRecord::Base
     self.save
   end
 
-  def self.removeUserToFriendsRequestsFromAllGroups(user_id)
+  def self.remove_user_to_friends_requests_from_all_groups(user_id)
     Group.all.each do |group|
       group.remove_user_from_friends_requests(user_id)
     end
@@ -47,8 +47,7 @@ class Group < ActiveRecord::Base
   end
 
   def user_technologies_compability(user_compability)
-    technologies = get_all_technologies
-    technologies.reduce(0) do |result, technology|
+    get_all_technologies.reduce(0) do |result, technology|
       user_compability.technologies.each do |technology_compatibility|
         if technology.name == technology_compatibility.name
           result += 1
@@ -66,8 +65,7 @@ class Group < ActiveRecord::Base
   end
 
   def user_hobbies_compability(user_compability)
-    hobbies = get_all_hobbies
-    hobbies.reduce(0) do |result, hobby|
+    get_all_hobbies.reduce(0) do |result, hobby|
       user_compability.hobbies.each do |hobby_compatibility|
         if hobby.name == hobby_compatibility.name
           result += 1

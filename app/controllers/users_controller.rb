@@ -9,7 +9,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
+    @user = User.find_by(id: current_user.id)
+
     if @user.update(user_params)
       flash[:success] = "Data changed successfully!"
       redirect_to profile_path
@@ -21,13 +22,14 @@ class UsersController < ApplicationController
   end
 
   def update_password
-    @user = User.find(current_user.id)
+    @user = User.find_by(id: current_user.id)
+
     if @user.update_with_password(change_password_params)
-      # Sign in the user by passing validation in case their password changed
       sign_in @user, :bypass => true
       flash[:success] = "Password changed successfully!"
       redirect_to change_password_path
     else
+      flash.now[:error] = "An error has occurred!"
       render "change_password", layout: "profile"
     end
   end
@@ -44,9 +46,5 @@ class UsersController < ApplicationController
 
     def change_password_params
       params.require(:user).permit(:current_password, :password, :password_confirmation)
-    end
-
-    def auth_user
-      redirect_to root_path unless user_signed_in?
     end
 end

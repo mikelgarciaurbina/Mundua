@@ -1,6 +1,6 @@
 var map;
 document.addEventListener('DOMContentLoaded', function() {
-  if(window.location.pathname == "/search"){
+  if(window.location.pathname == "/search") {
     var container = document.getElementById('popup');
     var content = document.getElementById('popup-content');
     var closer = document.getElementById('popup-closer');
@@ -18,8 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
       closer.blur();
       return false;
     };
+
     var longitude = document.getElementsByClassName("js-lng")[0].innerText;
     var latitude = document.getElementsByClassName("js-lat")[0].innerText;
+
     map = new ol.Map({
       layers: [
         new ol.layer.Tile({ 
@@ -69,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
       getHousesFromApi();
     });
 
-    function getMapExtent(){
+    function getMapExtent() {
       var extent = map.getView().calculateExtent(map.getSize());
       var bottomLeft = ol.proj.transform(ol.extent.getBottomLeft(extent),
           'EPSG:3857', 'EPSG:4326');
@@ -78,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
       return [bottomLeft[0], bottomLeft[1], topRight[0], topRight[1]];
     }
 
-    function getHousesFromApi(){
+    function getHousesFromApi() {
       Mundua.getHousesInApi(getMapExtent()).then(handleHouses);
     }
 
@@ -118,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
       })
     });
 
-    function createMarker(house){
+    function createMarker(house) {
       var iconFeature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.transform([eval(house.longitude),
           eval(house.latitude)], 'EPSG:4326', 'EPSG:3857')),
@@ -146,7 +148,7 @@ function houseToHTML(house) {
   var color = "";
   if(house.users_count == 0) {
     color = "light-green";
-  } else if(house.users_count >= house.rooms){
+  } else if(house.users_count >= house.rooms) {
     color = "red";
   } else {
     color = "orange";
@@ -195,7 +197,7 @@ function houseToHTML(house) {
   '</div>';
 }
 
-function housesNotFoundHTml(){
+function housesNotFoundHTml() {
   return '' +
     '<div class="col-12">' +
       '<center>' + 

@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', function() {
-  if(window.location.pathname == "/"){
+  if(window.location.pathname == "/") {
     Mundua.searchNomadList().then(handleRecords);
   }
   
   $(".js-typed").typed({
-      strings: ["Find the Best Place to Work"],
-      loop: false,
-      backSpeed: 20,
-      typeSpeed: 40
+    strings: ["Find the Best Place to Work"],
+    loop: false,
+    backSpeed: 20,
+    typeSpeed: 40
   });
 
   addEventsToLinks();
@@ -27,10 +27,10 @@ function getCityFromResponse(cities) {
   return cities.reduce(function(result, city) {
     result += cityToHTML(city);
     return result;
-  },'');
+  }, '');
 }
 
-function getStatistics(city){
+function getStatistics(city) {
   var red = "#EA4335";
   var green = "#2AA583";
   var blue = "#15a3ff";
@@ -107,30 +107,31 @@ function cityToHTML(city) {
   '</div>';
 }
 
-function addEventsToLinks(){
+function addEventsToLinks() {
   var login = document.getElementsByClassName("js-login");
-  Array.prototype.forEach.call(login, function(element) {
-    element.onclick = function(event){
+  Array.from(login).forEach(function(element) {
+    element.onclick = function(event) {
       loadModal(event, this);
     };
   });
   var joinNow = document.getElementsByClassName("js-join-now");
-  Array.prototype.forEach.call(joinNow, function(element) {
-    element.onclick = function(event){
+  Array.from(joinNow).forEach(function(element) {
+    element.onclick = function(event) {
       loadModal(event, this);
     };
   });
   var forgotPassword = document.getElementsByClassName("js-forgot-password");
-  Array.prototype.forEach.call(forgotPassword, function(element) {
-    element.onclick = function(event){
+  Array.from(forgotPassword).forEach(function(element) {
+    element.onclick = function(event) {
       loadModal(event, this);
     };
   });
 }
 
-function loadModal(event, self){
+function loadModal(event, self) {
   event.preventDefault();
-  Mundua.getDevise(self.pathname).then(function(result){
+
+  Mundua.getDevise(self.pathname).then(function(result) {
     var modal = getModal("js-modal-body");
     fillModal(modal, result);
     openModal();
@@ -142,7 +143,7 @@ function getModal(className) {
   return document.getElementsByClassName(className)[0];
 }
 
-function fillModal(modal, result){
+function fillModal(modal, result) {
   modal.innerHTML = getBodyToHtml(result);
 }
 

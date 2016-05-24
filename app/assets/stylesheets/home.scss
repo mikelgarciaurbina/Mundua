@@ -2,8 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.header,
-.footer{
+.header, .footer {
   min-height: 560px;
   text-shadow: 0 1px 1px rgba(0,0,0,0.3);
   background: url("/images/map.png") no-repeat center center fixed;
@@ -12,53 +11,44 @@
   -o-background-size: cover;
   background-size: cover;
 }
-.footer{
+.footer {
   min-height: 380px;
 }
-.form{
+.form {
   background: rgba(0,0,0,0.5) !important;
 }
-.form > div{
+.form > div {
   margin-bottom: 0;
 }
-.form *{
+.form * {
   transition: none;
 }
-.form select{
+.form select {
   border-left-color: #dedede !important;
 }
-.push-top{
+.push-top {
   margin-top: 90px;
   padding-bottom: 130px;
 }
-.addon-append input,
-.addon-append .btn{
+.addon-append input, .addon-append .btn {
   border-radius: 0;
   font-size: 17px !important;
 }
-.social{
+.social {
   border-top: 1px solid rgba(255,255,255,0.16);
 }
 
-/* __ colors __ */
-
-.light-silver{
+.light-silver {
   background: #e8e8e8;
 }
 
-.rgba{
+.rgba {
   background: rgba(0,0,0,0.7);
   min-height: 380px;
 }
 
-.margin-top-10{
+.margin-top-10 {
   margin-top: 10px;
-}
-
-@media (max-width: 800px){
-  .navbar{
-    background: #2196F3;
-  }
 }
 
 .logo-title {
@@ -70,4 +60,10 @@
   font-size: 26px;
   margin-top: 30px;
   height: 23px;
+}
+
+@media (max-width: 800px) {
+  .navbar{
+    background: #2196F3;
+  }
 }

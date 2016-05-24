@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Hobby, type: :model do
   it "is valid with a name" do
-    hobby = FactoryGirl.build(:hobby)
+    hobby = create(:hobby)
     expect(hobby).to be_valid
   end
 
   it "is correct a name" do
-    hobby = FactoryGirl.build(:hobby)
+    hobby = create(:hobby)
     expect(hobby.name).to eq("Basketball")
   end
 
@@ -18,13 +18,13 @@ RSpec.describe Hobby, type: :model do
   end
 
   it "is valid with a name" do
-    hobby = FactoryGirl.build(:hobby)
+    hobby = create(:hobby)
     hobby.valid?
     expect(hobby.errors[:name]).not_to include("can't be blank")
   end
 
   it "is valid relation hobby - user" do
-    hobby = FactoryGirl.build(:hobby)
+    hobby = create(:hobby)
     user = User.create(
       name: "Mikel",
       email: "mikel@ironhack.com",

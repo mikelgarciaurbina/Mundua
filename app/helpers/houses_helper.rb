@@ -42,7 +42,7 @@ module HousesHelper
     end
   end
 
-  def getGroupsFromString(string)
+  def get_groups_from_string(string)
     string.split(", ").map do |id|
       Group.find(id)
     end

@@ -37,7 +37,7 @@
             </div>
           </div>
           <hr>
-          <% getGroupsFromString(house.groups_requests).each do |group| %>
+          <% get_groups_from_string(house.groups_requests).each do |group| %>
             <div class="row padding-20">
               <div class="col-9">
                 <h5><%= group.name %></h5>
@@ -113,7 +113,7 @@
                 </tbody>
               </table>
             </div>
-            <% unless getGroupsFromString(house.groups_requests)[getGroupsFromString(house.groups_requests).length - 1] == group %>
+            <% unless get_groups_from_string(house.groups_requests).last == group %>
               <hr>
             <% end %>
           <% end %>

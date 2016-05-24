@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :technology do
-    id 1
+  factory :technology, :class => 'Technology' do
     name "HTML5"
   end
 end

@@ -1,6 +1,5 @@
 FactoryGirl.define do
-  factory :hobby do
-    id 1
+  factory :hobby, :class => 'Hobby' do
     name "Basketball"
   end
 end

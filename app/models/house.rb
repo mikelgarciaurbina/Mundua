@@ -21,14 +21,14 @@ class House < ActiveRecord::Base
   def as_json(options={})
     super(except: [:created_at, :updated_at, :owner_id, :image_content_type,
       :image_file_size, :image_updated_at, :image_file_name],
-      methods: [:groups_count, :users_count, :image_url])
+      methods: [:groups_count, :how_many_users_in_house, :image_url])
   end
 
   def groups_count
     self.groups.count
   end
 
-  def users_count
+  def how_many_users_in_house
     self.groups.reduce(0){ |result, group| result += group.users.count }
   end
 
@@ -43,7 +43,7 @@ class House < ActiveRecord::Base
     self.save
   end
 
-  def self.removeGroupToGroupsRequestsFromAllHouses(group_id)
+  def self.remove_group_to_groups_requests_from_all_houses(group_id)
     House.all.each do |house|
       house.remove_group_from_groups_requests(group_id)
     end

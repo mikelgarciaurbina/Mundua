@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe Technology, type: :model do
   it "is valid with a name" do
-    technology = FactoryGirl.build(:technology)
+    technology = create(:technology)
     expect(technology).to be_valid
   end
 
   it "is correct a name" do
-    technology = FactoryGirl.build(:technology)
+    technology = create(:technology)
     expect(technology.name).to eq("HTML5")
   end
 
@@ -18,13 +18,13 @@ RSpec.describe Technology, type: :model do
   end
 
   it "is valid with a name" do
-    technology = FactoryGirl.build(:technology)
+    technology = create(:technology)
     technology.valid?
     expect(technology.errors[:name]).not_to include("can't be blank")
   end
 
   it "is valid relation technology - user" do
-    technology = FactoryGirl.build(:technology)
+    technology = create(:technology)
     user = User.create(
       name: "Mikel",
       email: "mikel@ironhack.com",
