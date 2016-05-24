@@ -18,7 +18,8 @@
         <% if current_user.id == house.owner_id %>
           <div class="row padding">
             <div class="col-12">
-              <a href="/houses/<%= house.id %>" data-method="delete" class="btn red">Delete my house</a>
+              <%= link_to 'Edit my house', edit_house_path(house), class: "btn blue" %>
+              <%= link_to 'Delete my house', house, method: :delete, class: "btn red" %>
             </div>
           </div>
         <% end %>
@@ -193,10 +194,14 @@
             <% end %>
           <% end %>
         <% end %>
-
-
       </div>
     </div>
   </div>
 <% end %>
-
+<% if @houses.length == 0 %>
+  <center>
+    <h4 class="padding-bottom-20">You dont have houses</h4>
+    <p><%= link_to 'Create my house', new_house_path, class: "btn blue" %></p>
+  </center>
+  
+<% end %> 

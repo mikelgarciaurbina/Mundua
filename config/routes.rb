@@ -4,14 +4,14 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :groups, only: [ :new, :create, :update ]
+  resources :groups, only: [ :new, :create, :update, :destroy ]
   get '/group', to: 'groups#show', as: 'show_group'
   get '/group-edit', to: 'groups#edit'
   post '/join-group', to: 'groups#join_group'
   get '/accept-user/:user', to: 'groups#accept_user'
   get '/reject-user/:user', to: 'groups#reject_user'
   delete '/delete-user/:user', to: 'groups#delete_user', as: 'delete_user_from_group'
-  resources :houses, only: [ :new, :create, :show, :destroy ]
+  resources :houses, only: [ :new, :create, :show, :destroy, :edit, :update ]
   get '/my-houses', to: 'houses#my_houses'
   get '/group-house', to: 'houses#group_house'
   post '/join-house', to: 'houses#join_house'

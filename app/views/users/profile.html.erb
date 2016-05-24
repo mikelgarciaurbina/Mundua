@@ -4,7 +4,7 @@
   
   <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+    <%= form.text_field :name, class: 'form-control', required: true %>
   </div>
 
   <div class="form-group">
@@ -28,7 +28,7 @@
 </div>
 <%= form_for @technology do |form| %>
   <div id="technology">
-    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Technology">
+    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Technology" required=true>
   </div>
   <%= form.submit "Add technology", class: "btn blue margin-top-10" %>
 <% end %>
@@ -45,7 +45,7 @@
 </div>
 <%= form_for @hobby do |form| %>
   <div id="hobby">
-    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Hobby">
+    <input class="typeahead form-control" name="name" type="text" placeholder="Insert Hobby" required=true>
   </div>
   <%= form.submit "Add hobby", class: "btn blue margin-top-10" %>
 <% end %>

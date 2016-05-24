@@ -1,6 +1,7 @@
 {
   "name": "dsl-generated dependencies",
   "dependencies": {
-    "modulr": "latest"
+    "modulr": "latest",
+    "typed.js": "latest"
   }
 }

@@ -2,10 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.content-li:before {
+.content-li:before, #error_explanation li:before {
   content: ' - ';
 }
 
-.content-li-red {
+.content-li-red, #error_explanation li {
   color: red;
+}
+
+#error_explanation h2 {
+  font-size: 19px;
+  padding: 8px 0;
+}
+
+#error_explanation ul {
+  padding-left: 10px;
 }

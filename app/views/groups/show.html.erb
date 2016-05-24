@@ -70,6 +70,13 @@
         <p><span class="text-strong">Description:</span> <%= @group.description %></p>
       </div>
     </div>
+    <% if current_user.id == @group.owner_id %>
+      <div class="row padding">
+        <div class="col-12">
+          <%= link_to 'Delete my group', @group, method: :delete, class: "btn red" %>
+        </div>
+      </div>
+    <% end %>
     <div class="row">
       <div class="col-12">
         <h5 class="padding-20">Users</h5>

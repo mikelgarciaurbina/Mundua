@@ -8,8 +8,12 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-  
-    <%= yield %>
+    <%= render partial: "layouts/flash" %>
+    
+    <%= render partial: "layouts/modal" %>
 
+    <%= render partial: "layouts/nav" %>
+    
+    <%= yield %>
   </body>
 </html>

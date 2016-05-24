@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
   def edit
     @group = current_user.group
     if current_user.id != current_user.group.owner_id
+      flash[:error] = "You don't have a permission!"
       redirect_to profile_path
     end
   end
@@ -90,6 +91,17 @@ class GroupsController < ApplicationController
       flash[:error] = "You don't have a permission!"
     end
     redirect_to show_group_path
+  end
+
+  def destroy
+    group = Group.find_by(id: params[:id])
+    if current_user.id == group.owner_id
+      group.delete
+      flash[:success] = "Group deleted!"
+    else
+      flash[:error] = "You don't have a permission!"
+    end
+    redirect_to new_group_path
   end
 
   private

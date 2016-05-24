@@ -1,0 +1,27 @@
+<!-- Menu Start -->
+<ul class="pull-right menu href-text-white">
+  <li><a href="#"><i class="fa fa-lg fa-support"></i> Help</a></li>
+  <li class="divider"></li>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to profile_path do %>
+        <i class="fa fa-lg fa-user"></i> <%= current_user.name %>
+      <% end %>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <%= link_to destroy_user_session_path, method: 'DELETE' do %>
+        <i class="fa fa-lg fa-sign-out"></i> Sign out
+      <% end %>
+    </li>
+  <% else %>
+    <li><%= link_to 'Login', new_user_session_path, class: "js-login" %></li>
+    <li class="divider"></li>
+    <li>
+      <%= link_to 'Join Now', new_user_registration_path, class: "fill-blue js-join-now" %>
+    </li>
+  <% end %>
+  <!-- <li><a href="#">About Us</a></li>
+  <li><a class="fill-blue" href="#">Join Now</a></li> -->
+</ul>
+<!-- Menu End -->

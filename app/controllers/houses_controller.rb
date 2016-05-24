@@ -12,7 +12,24 @@ class HousesController < ApplicationController
 
   def show
     @house = House.find(params[:id])
-    render layout: "search"
+  end
+
+  def edit
+    @house = House.find(params[:id])
+    if current_user.id != @house.owner_id
+      flash[:error] = "You don't have a permission!"
+      redirect_to profile_path
+    end
+  end
+
+  def update
+    @house = House.find(params[:id])
+    if @house.update(house_params)
+      flash[:success] = "The house was update successfully!"
+      redirect_to my_houses_path
+    else
+      render 'edit'
+    end
   end
 
   def create

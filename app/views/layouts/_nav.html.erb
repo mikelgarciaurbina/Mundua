@@ -1,27 +1,23 @@
-<!-- Menu Start -->
-<ul class="pull-right menu href-text-white">
-  <li><a href="#"><i class="fa fa-lg fa-support"></i> Help</a></li>
-  <li class="divider"></li>
-  <% if user_signed_in? %>
-    <li>
-      <%= link_to profile_path do %>
-        <i class="fa fa-lg fa-user"></i> <%= current_user.name %>
-      <% end %>
-    </li>
+<!-- Navbar Start -->
+<div class="navbar blue">
+  <!-- Brand Start-->
+  <%= link_to 'Mundua', root_path, class: "brand text-white" %>
+  <!-- Brand End-->
+  <!-- Menu Start-->
+  <ul class="menu pull-left">
     <li class="divider"></li>
-    <li>
-      <%= link_to destroy_user_session_path, method: 'DELETE' do %>
-        <i class="fa fa-lg fa-sign-out"></i> Sign out
-      <% end %>
-    </li>
-  <% else %>
-    <li><%= link_to 'Login', new_user_session_path, class: "js-login" %></li>
-    <li class="divider"></li>
-    <li>
-      <%= link_to 'Join Now', new_user_registration_path, class: "fill-blue js-join-now" %>
-    </li>
-  <% end %>
-  <!-- <li><a href="#">About Us</a></li>
-  <li><a class="fill-blue" href="#">Join Now</a></li> -->
-</ul>
-<!-- Menu End -->
+  </ul>
+  <!-- Menu End -->
+  
+  <!-- Search Form Start-->
+  <form class="form purple icon-right" action="<%= search_path %>"  method="get">
+    <input class="js-latitude" name="lat" type="hidden">
+    <input class="js-longitude" name="lng" type="hidden">
+    <input class="border-transparent js-address-search" type="text" placeholder="Search anything..">
+    <button type="submit"><i class="fa fa-search"></i></button>
+  </form>
+   <!-- Search Form End-->
+  
+  <%= render partial: "layouts/right_nav" %>
+  
+</div>

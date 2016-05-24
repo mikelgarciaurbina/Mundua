@@ -13,6 +13,7 @@
 //= require ol.js
 //= require jquery
 //= require jquery_ujs
+//= require typed.js.js
 //= require typeahead.bundle.min.js
 //= require_tree .
 

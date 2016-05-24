@@ -3,6 +3,13 @@ document.addEventListener('DOMContentLoaded', function() {
     Mundua.searchNomadList().then(handleRecords);
   }
   
+  $(".js-typed").typed({
+      strings: ["Find the Best Place to Work"],
+      loop: false,
+      backSpeed: 20,
+      typeSpeed: 40
+  });
+
   addEventsToLinks();
 });
 
@@ -144,5 +151,5 @@ function openModal() {
 }
 
 function getBodyToHtml(html) {
-  return /<body.*?>([\s\S]*)<\/body>/.exec(html)[1];
+  return /<aside class="js-content-body">([\s\S]*)<\/aside>/.exec(html)[1];
 }
