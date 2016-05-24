@@ -100,8 +100,12 @@ document.addEventListener('DOMContentLoaded', function() {
         map.removeLayer(layers.a[1]);
       map.addLayer(vectorLayer);
 
-      document.getElementsByClassName("js-houses-list-search")[0].innerHTML =
-        getHousesFromResponse(houses);
+      if (houses.length > 0)
+        document.getElementsByClassName("js-houses-list-search")[0].innerHTML =
+          getHousesFromResponse(houses);
+      else
+        document.getElementsByClassName("js-houses-list-search")[0].innerHTML =
+          housesNotFoundHTml();
     }
 
     var iconStyle = new ol.style.Style({
@@ -189,4 +193,13 @@ function houseToHTML(house) {
         '</div>' +
     '</div>' +
   '</div>';
+}
+
+function housesNotFoundHTml(){
+  return '' +
+    '<div class="col-12">' +
+      '<center>' + 
+      '<h4>Houses not found</h4>' +
+      '</center>' +
+    '</div>';
 }

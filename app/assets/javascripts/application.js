@@ -35,11 +35,10 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 var Mundua = function() {
-    var url_base_nomadlist = "https://nomadlist.com/";
     var url_api = "/api/v1";
 
     _searchNomadList = function () {
-        var query = url_base_nomadlist + "api/v2/list/cities";
+        var query = url_api + "/nomadlist";
         return _proxy('GET', query, 'json' );
     };
 

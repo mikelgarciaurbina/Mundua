@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       resources :houses, only: [:index]
       resources :technologies, only: [:index]
       resources :hobbies, only: [:index]
+      get '/nomadlist', to: 'nomadlist#index'
     end
   end
 end
