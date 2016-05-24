@@ -25,6 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 
 gem "paperclip", "~> 4.2"
+gem 'aws-sdk', '~> 2.3'
 
 gem "bower-rails", "~> 0.10.0"
 
