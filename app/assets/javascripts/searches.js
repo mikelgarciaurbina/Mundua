@@ -146,9 +146,9 @@ function getHousesFromResponse(houses) {
 
 function houseToHTML(house) {
   var color = "";
-  if(house.users_count == 0) {
+  if(house.how_many_users_in_house == 0) {
     color = "light-green";
-  } else if(house.users_count >= house.rooms) {
+  } else if(house.how_many_users_in_house >= house.rooms) {
     color = "red";
   } else {
     color = "orange";
@@ -174,8 +174,9 @@ function houseToHTML(house) {
         '</div>' +
         '<div class="row padding">' +
           '<div class="pull-left">' +
-            '<a href="/houses/' + house.id + '" class="btn icon round' +
+            '<a href="/houses/' + house.id + '" class="btn icon round hover-tooltip' +
               ' text-' + color + ' fill-silver">' +
+              '<span class="tooltip top">Rooms in this house</span>' +
               '<i class="fa fa-bed"></i>' +
             '</a>' +
             '<a class="btn white hover-disable text-' +
@@ -199,9 +200,9 @@ function houseToHTML(house) {
 
 function housesNotFoundHTml() {
   return '' +
-    '<div class="col-12">' +
+    '<div class="col-12 padding-top">' +
       '<center>' + 
-      '<h4>Houses not found</h4>' +
+      '<h4>Houses not found in this place</h4>' +
       '</center>' +
     '</div>';
 }

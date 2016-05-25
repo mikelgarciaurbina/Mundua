@@ -1,22 +1,18 @@
 require 'rails_helper'
 
 RSpec.feature "AddNewGroups", type: :feature do
-  pending "add new group" do
-    login_as create( :user ), scope: :user
+  it "add new group" do
+    user = create(:user)
+    login_as user, scope: :user
 
     visit new_group_path
+    login_as user, scope: :user
 
-    within "#new_group" do
-      fill_in "group[name]", with: "Ironhack"
-      fill_in "group[description]", with: "test test test"
-    end
+    fill_in "group[name]", with: "Ironhack"
+    fill_in "group[description]", with: "test test test"
 
-    click_button "Create group"
+    click_button "Create Group"
 
-    within "hover-tooltip" do
-    end
-
-    expect( Group.count ).to eq(1)
-    expect( Group.first.name).to eq( "Ironhack")
+    expect(page).to have_text("Image can't be blank")
   end
 end

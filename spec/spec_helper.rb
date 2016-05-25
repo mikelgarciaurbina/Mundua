@@ -19,20 +19,15 @@
 
 require_relative 'support/controller_helpers'
 require 'devise'
-# require 'capybara/rspec'
-# require 'capybara/rails'
+require 'capybara/rspec'
+#require 'capybara/rails'
+require 'selenium-webdriver'
 
-# Capybara.configure do |c|
-#   c.default_driver = :chrome
-#   c.javascript_driver = :chrome
-#   c.app_host = 'http://localhost:3000'
-# end
-
-# Capybara.register_driver :chrome do |app|
-#   Capybara::Selenium::Driver.new(app, :browser => :chrome)
-# end
-
-# Capybara.javascript_driver = :chrome
+Capybara.default_driver = :firefox
+Capybara.run_server = true
+Capybara.register_driver :firefox do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :firefox)
+end
 
 RSpec.configure do |config|
 
