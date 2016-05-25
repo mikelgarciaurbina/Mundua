@@ -174,9 +174,9 @@ function houseToHTML(house) {
         '</div>' +
         '<div class="row padding">' +
           '<div class="pull-left">' +
-            '<a href="/houses/' + house.id + '" class="btn icon round hover-tooltip' +
-              ' text-' + color + ' fill-silver">' +
-              '<span class="tooltip top">Rooms in this house</span>' +
+            '<a href="/houses/' + house.id + '" class="btn icon round' +
+              ' text-' + color + ' fill-silver hover-tooltip">' +
+              '<span class="tooltip right">Rooms in this house</span>' +
               '<i class="fa fa-bed"></i>' +
             '</a>' +
             '<a class="btn white hover-disable text-' +
@@ -186,7 +186,8 @@ function houseToHTML(house) {
           '</div>' +
           '<div class="pull-right">' +
             '<a href="/houses/' + house.id + '" class="btn icon round' +
-              ' text-gray hover-text-red">' +
+              ' text-gray hover-text-red hover-tooltip">' +
+              '<span class="tooltip left">Groups in this house</span>' +
               '<i class="fa fa-users"></i>' +
             '</a>' +
             '<a class="btn white hover-disable text-gray text600">' +

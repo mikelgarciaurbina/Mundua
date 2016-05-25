@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "AddNewGroups", type: :feature do
+RSpec.feature "add_new_groups", type: :feature do
   it "add new group" do
     user = create(:user)
     login_as user, scope: :user
