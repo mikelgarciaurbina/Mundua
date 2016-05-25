@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/accept-user/:user', to: 'groups#accept_user'
   get '/reject-user/:user', to: 'groups#reject_user'
   delete '/delete-user/:user', to: 'groups#delete_user', as: 'delete_user_from_group'
-  resources :houses, only: [ :new, :create, :show, :destroy, :edit, :update ]
+  resources :houses, except: [ :index ]
   get '/my-houses', to: 'houses#my_houses'
   get '/group-house', to: 'houses#group_house'
   post '/join-house', to: 'houses#join_house'

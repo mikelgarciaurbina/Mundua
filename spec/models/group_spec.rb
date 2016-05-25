@@ -137,7 +137,7 @@ RSpec.describe Group, type: :model do
     expect(group.user_compatibility(user2)).to eq(100)
   end
 
-  it "user_technologies_compability" do
+  it "user_technologies_compatibility" do
     group = create(:group)
     user = create(:user)
     user2 = create(:user, email: "alex@ironhack.com", id: 2)
@@ -152,10 +152,10 @@ RSpec.describe Group, type: :model do
     user2.hobbies.push(hobby)
     user2.save
     group.users.push(user)
-    expect(group.user_technologies_compability(user2)).to eq(1)
+    expect(group.user_technologies_compatibility(user2)).to eq(1)
   end
 
-  it "user_hobbies_compability" do
+  it "user_hobbies_compatibility" do
     group = create(:group)
     user = create(:user)
     user2 = create(:user, email: "alex@ironhack.com", id: 2)
@@ -170,7 +170,7 @@ RSpec.describe Group, type: :model do
     user2.hobbies.push(hobby)
     user2.save
     group.users.push(user)
-    expect(group.user_hobbies_compability(user2)).to eq(1)
+    expect(group.user_hobbies_compatibility(user2)).to eq(1)
   end
 
   it "get_all_technologies" do
@@ -184,7 +184,7 @@ RSpec.describe Group, type: :model do
     expect(group.get_all_technologies).to eq([technology])
   end
 
-  it "user_hobbies_compability" do
+  it "user_hobbies_compatibility" do
     group = create(:group)
     user = create(:user)
     hobby = create(:hobby)

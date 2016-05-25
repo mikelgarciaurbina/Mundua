@@ -19,20 +19,17 @@ class Group < ActiveRecord::Base
   def remove_user_from_friends_requests(user_id)
     users_ids = self.friends_requests.split(', ')
     users_ids -= [user_id]
-    self.friends_requests = users_ids.join(', ')
-    self.save
+    update friends_requests: users_ids.join(', ')
   end
 
   def self.remove_user_to_friends_requests_from_all_groups(user_id)
-    Group.all.each do |group|
+    all.each do |group|
       group.remove_user_from_friends_requests(user_id)
     end
   end
 
   def total_match
-    users.reduce(0) do |result, user|
-      result += user.technologies.count + user.hobbies.count
-    end
+    users.map {|user| user.technologies.count + user.hobbies.count}.sum
   end
 
   def user_compatibility(user_compability)
@@ -40,45 +37,23 @@ class Group < ActiveRecord::Base
   end
 
   def user_total_compatibility(user_compability)
-    compatibility = 0
-    compatibility += user_technologies_compability(user_compability)
-    compatibility += user_hobbies_compability(user_compability)
-    compatibility
+    compatibility ||= user_technologies_compatibility(user_compability)
+    compatibility += user_hobbies_compatibility(user_compability)
   end
 
-  def user_technologies_compability(user_compability)
-    get_all_technologies.reduce(0) do |result, technology|
-      user_compability.technologies.each do |technology_compatibility|
-        if technology.name == technology_compatibility.name
-          result += 1
-        end
-      end
-      result
-    end
+  def user_technologies_compatibility(user)
+    get_all_technologies.map { |tech| user.compatibility_technologies(tech) }.sum
   end
 
   def get_all_technologies
-    technologies = users.map do |user|
-      user.technologies
-    end
-    technologies.flatten
+    users.map { |user| user.technologies }.flatten
   end
 
-  def user_hobbies_compability(user_compability)
-    get_all_hobbies.reduce(0) do |result, hobby|
-      user_compability.hobbies.each do |hobby_compatibility|
-        if hobby.name == hobby_compatibility.name
-          result += 1
-        end
-      end
-      result
-    end
+  def user_hobbies_compatibility(user)
+    get_all_hobbies.map { |hobby| user.compatibility_hobbies(hobby) }.sum
   end
 
   def get_all_hobbies
-    hobbies = users.map do |user|
-      user.hobbies
-    end
-    hobbies.flatten
+    users.map { |user| user.hobbies }.flatten
   end
 end

@@ -11,4 +11,12 @@ class User < ActiveRecord::Base
   has_many :technologies, through: :userTechnologies
 
   validates :name, presence: true
+
+  def compatibility_technologies(techs)
+    (technologies & [techs].flatten).size
+  end
+
+  def compatibility_hobbies(hobbs)
+    (hobbies & [hobbs].flatten).size
+  end
 end

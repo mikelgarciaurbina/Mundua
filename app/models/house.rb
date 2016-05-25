@@ -11,7 +11,7 @@ class House < ActiveRecord::Base
               original: ['1000x500>', :jpg] },
     convert_options: { thumb: "-quality 75 -strip",
                        original: "-quality 85 -strip" }
-
+  
   validates :latitude, presence: true
   validates :longitude, presence: true
   validates :address, presence: true
@@ -25,22 +25,21 @@ class House < ActiveRecord::Base
   end
 
   def groups_count
-    self.groups.count
+    groups.count
   end
 
   def how_many_users_in_house
-    self.groups.reduce(0){ |result, group| result += group.users.count }
+    groups.map { |group| group.users.count }.sum
   end
 
   def image_url
-    self.image.url
+    image.url
   end
 
   def remove_group_from_groups_requests(group_id)
-    groups_ids = self.groups_requests.split(', ')
+    groups_ids = groups_requests.split(', ')
     groups_ids -= [group_id]
-    self.groups_requests = groups_ids.join(', ')
-    self.save
+    update groups_requests: groups_ids.join(', ')
   end
 
   def self.remove_group_to_groups_requests_from_all_houses(group_id)
