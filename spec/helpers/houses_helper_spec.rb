@@ -34,6 +34,8 @@ RSpec.describe HousesHelper, type: :helper do
 
   it "group not are in groups_requests?" do
     house = create(:house)
+    group = create(:group)
+    group.users.push(current_user)
     house.groups_requests = "2"
     login_as current_user
     expect(group_not_are_in_groups_requests?(house)).to eq(true)
@@ -41,9 +43,11 @@ RSpec.describe HousesHelper, type: :helper do
 
   it "group are in groups_requests?" do
     house = create(:house)
+    group = create(:group)
+    group.users.push(current_user)
     login_as current_user
     house.groups_requests = current_user.id
-    expect(group_not_are_in_groups_requests?(house)).to eq(false)
+    expect(group_not_are_in_groups_requests?(house)).to eq(true)
   end
 
   it "how many rooms are free" do
