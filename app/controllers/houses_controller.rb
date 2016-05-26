@@ -62,7 +62,7 @@ class HousesController < ApplicationController
     # end
 
     house.groups_requests = house.groups_requests.to_s.split(', ')
-      .push(current_user.id).join(', ')
+      .push(current_user.group.id).join(', ')
 
     if house.save
       flash[:success] = "The request has sent!"
