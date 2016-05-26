@@ -37,7 +37,7 @@ class House < ActiveRecord::Base
   end
 
   def remove_group_from_groups_requests(group_id)
-    groups_ids = groups_requests.split(', ')
+    groups_ids = groups_requests.to_s.split(', ')
     groups_ids -= [group_id]
     update groups_requests: groups_ids.join(', ')
   end

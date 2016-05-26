@@ -49,12 +49,6 @@ class GroupsController < ApplicationController
   def join_group
     group = Group.find_by(id: params[:group][:id])
 
-    # if group.friends_requests.blank?
-    #   group.friends_requests = current_user.id
-    # else
-    #   group.friends_requests += ", #{current_user.id}"
-    # end
-
     group.friends_requests = group.friends_requests.to_s.split(', ')
       .push(current_user.id).join(', ')
     
