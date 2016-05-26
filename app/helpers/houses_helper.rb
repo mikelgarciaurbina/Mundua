@@ -15,7 +15,7 @@ module HousesHelper
     if house.groups_requests.nil?
       true
     else
-      result = house.groups_requests.split(", ").find{|i| i == current_user.id.to_s}
+      result = house.groups_requests.split(", ").find{|i| i == current_user.group.id.to_s}
       result.nil?
     end
   end
