@@ -28,6 +28,9 @@ var Mundua = function() {
       xhr.withCredentials = false;
       xhr.responseType = responseType;
 
+      if (method === "POST")
+        xhr.setRequestHeader("Content-type", "application/json");
+
       xhr.onload = function() {
         if (xhr.status === 200){
           resolve(xhr.response);
